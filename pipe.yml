@@ -1,0 +1,12 @@
+name: Debricked Scan
+image: debricked/debricked:0.0.0
+description: Pipe for integrating Bitbucket with Debricked. Automatically analyse your latest commits and pull requests for known vulnerabilities.
+repository: https://bitbucket.org/debricked/debricked
+maintainer: oscar.reimer@debricked.com
+icon: https://debricked.com/wp-content/uploads/2018/09/Logotype.jpg
+tags:
+    - Dependency management
+    - Security
+    - Continuous Integration
+    - Integrations
+  

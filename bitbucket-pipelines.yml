@@ -1,0 +1,31 @@
+image:
+  name: atlassian/default-image:2
+
+test: &test
+  step:
+    name: Test
+    script:
+    - npm install -g bats
+    - chmod a+x test/*.bats
+    - bats test/test.bats
+    services:
+    - docker
+
+push: &push
+  step:
+    name: Push and Tag
+    image: python:3.7
+    script:
+    - pip install semversioner==0.*
+    - chmod a+x ci-scripts/release.sh
+    - ./ci-scripts/release.sh debricked/$BITBUCKET_REPO_SLUG
+    services:
+    - docker
+
+pipelines:
+  default:
+  - <<: *test
+  branches:
+    master:
+    - <<: *test
+    - <<: *push
