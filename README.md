@@ -8,16 +8,24 @@ Add the following snippet to the script section of your `bitbucket-pipelines.yml
 
 ```yaml
 script:
-  - pipe: debricked/debricked:0.0.0
+  - pipe: debricked/debricked-pipe:0.0.0
     variables:
-      NAME: "<string>"
+      USERNAME: "<string>"
+      PASSWORD: "<string>"
+      # BASE_DIRECTORY: "<string>" # Optional
+      # RECURSIVE_FILE_SEARCH: "<boolean>" # Optional
+      # EXCLUDED_DIRECTORIES: "<string>" # Optional
       # DEBUG: "<boolean>" # Optional
 ```
 ## Variables
 
 | Variable              | Usage                                                       |
 | --------------------- | ----------------------------------------------------------- |
-| NAME (*)              | The name that will be printed in the logs |
+| USERNAME (*)          | Your Debricked username |
+| PASSWORD (*)          | Your Debricked password |
+| BASE_DIRECTORY        | Base directory to scan through. Default: Empty string (repository root). |
+| RECURSIVE_FILE_SEARCH | Recursively search through base directory. Default: `true`. |
+| EXCLUDED_DIRECTORIES  | A comma separated list of directories to exclude. Default: A list of some common package managers' default modules/vendors directories. |
 | DEBUG                 | Turn on extra debug information. Default: `false`. |
 
 _(*) = required variable._
@@ -30,18 +38,23 @@ Basic example:
 
 ```yaml
 script:
-  - pipe: debricked/debricked:0.0.0
+  - pipe: debricked/debricked-pipe:0.0.0
     variables:
-      NAME: "foobar"
+      USERNAME: "foo"
+      PASSWORD: "bar"
 ```
 
 Advanced example:
 
 ```yaml
 script:
-  - pipe: debricked/debricked:0.0.0
+  - pipe: debricked/debricked-pipe:0.0.0
     variables:
-      NAME: "foobar"
+      USERNAME: "foo"
+      PASSWORD: "bar"
+      BASE_DIRECTORY: "src/"
+      RECURSIVE_FILE_SEARCH: "false"
+      EXCLUDED_DIRECTORIES: "target,vendor"
       DEBUG: "true"
 ```
 

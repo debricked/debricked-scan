@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BashSupportProjectSettings">
+    <option name="globalVariables">
+      <set>
+        <option value="BITBUCKET_BRANCH" />
+        <option value="BITBUCKET_COMMIT" />
+        <option value="BITBUCKET_REPO_OWNER" />
+        <option value="BITBUCKET_REPO_SLUG" />
+        <option value="DOCKERHUB_PASSWORD" />
+        <option value="DOCKERHUB_USERNAME" />
+        <option value="EXCLUDED_DIRECTORIES" />
+        <option value="output" />
+        <option value="status" />
+      </set>
+    </option>
+  </component>
+</project>
