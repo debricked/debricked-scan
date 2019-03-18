@@ -58,10 +58,12 @@ script:
       DEBUG: "true"
 ```
 
-## Support
-If youâ€™d like help with this pipe, or you have an issue or feature request, [let us know on Community](https://community.atlassian.com/t5/forums/postpage/choose-node/true/interaction-style/qanda?add-tags=bitbucket-pipelines,pipes,debricked).
+An example repository using this pipe can be found at https://bitbucket.org/debricked/example-use-of-debricked-pipe/src/master/.
 
-If youâ€™re reporting an issue, please include:
+## Support
+If you’d like help with this pipe, or you have an issue or feature request, [let us know on Community](https://community.atlassian.com/t5/forums/postpage/choose-node/true/interaction-style/qanda?add-tags=bitbucket-pipelines,pipes,debricked).
+
+If you’re reporting an issue, please include:
 
 - the version of the pipe
 - relevant logs and error messages
