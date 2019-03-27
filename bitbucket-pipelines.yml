@@ -18,7 +18,7 @@ push: &push
     script:
       - pip install semversioner==0.*
       - chmod a+x ci-scripts/release.sh
-      - ./ci-scripts/release.sh debricked/debricked-pipe
+      - ./ci-scripts/release.sh debricked/debricked-scan
     services:
       - docker
 

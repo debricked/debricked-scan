@@ -8,7 +8,7 @@ Add the following snippet to the script section of your `bitbucket-pipelines.yml
 
 ```yaml
 script:
-  - pipe: debricked/debricked-pipe:0.1.0
+  - pipe: debricked/debricked-scan:0.1.0
     variables:
       USERNAME: "<string>"
       PASSWORD: "<string>"
@@ -38,7 +38,7 @@ Basic example:
 
 ```yaml
 script:
-  - pipe: debricked/debricked-pipe:0.1.0
+  - pipe: debricked/debricked-scan:0.1.0
     variables:
       USERNAME: "foo"
       PASSWORD: "bar"
@@ -48,7 +48,7 @@ Advanced example:
 
 ```yaml
 script:
-  - pipe: debricked/debricked-pipe:0.1.0
+  - pipe: debricked/debricked-scan:0.1.0
     variables:
       USERNAME: "foo"
       PASSWORD: "bar"
@@ -61,7 +61,8 @@ script:
 An example repository using this pipe can be found at https://bitbucket.org/debricked/example-use-of-debricked-pipe/src/master/.
 
 ## Support
-If you'd like help with this pipe, or you have an issue or feature request, [let us know on Community](https://community.atlassian.com/t5/forums/postpage/choose-node/true/interaction-style/qanda?add-tags=bitbucket-pipelines,pipes,debricked).
+- If you have an issue or feature request or you'd like help with this pipe, [open an issue](https://bitbucket.org/debricked/debricked-scan/issues/new) or [pull request](https://bitbucket.org/debricked/debricked-scan/pull-requests/new)
+- If you have an issue containing sensitive data such as sensitive logs or screenshots, please send an email to [support@debricked.com](mailto:support@debricked.com)
 
 If you're reporting an issue, please include:
 
