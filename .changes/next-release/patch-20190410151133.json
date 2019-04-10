@@ -1,4 +1,0 @@
-{
-  "type": "patch",
-  "description": "Only run scan once in GitLab CI integration"
-}
