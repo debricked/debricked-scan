@@ -8,7 +8,8 @@
         <option value="BITBUCKET_REPO_OWNER" />
         <option value="BITBUCKET_REPO_SLUG" />
         <option value="CI_COMMIT_SHA" />
-        <option value="CI_MERGE_REQUEST_PROJECT_PATH" />
+        <option value="CI_PROJECT_DIR" />
+        <option value="CI_PROJECT_PATH" />
         <option value="DOCKERHUB_PASSWORD" />
         <option value="DOCKERHUB_USERNAME" />
         <option value="EXCLUDED_DIRECTORIES" />
