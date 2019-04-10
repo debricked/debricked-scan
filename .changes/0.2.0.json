@@ -1,0 +1,6 @@
+[
+  {
+    "description": "Added support for GitLab CI",
+    "type": "minor"
+  }
+]
