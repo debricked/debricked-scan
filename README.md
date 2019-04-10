@@ -21,7 +21,7 @@ script:
 
 | Variable              | Usage                                                       |
 | --------------------- | ----------------------------------------------------------- |
-| USERNAME (*)          | Your Debricked username. Don't have an account? No worries! Get your free 30-day trial at https://seconds.debricked.com/en/register |
+| USERNAME (*)          | Your Debricked username. Don't have an account? No worries! Get your free 30-day trial at [https://seconds.debricked.com/en/register](https://seconds.debricked.com/en/register?utm_source=bitbucket_pipe) |
 | PASSWORD (*)          | Your Debricked password |
 | BASE_DIRECTORY        | Base directory to scan through. Default: Empty string (repository root). |
 | RECURSIVE_FILE_SEARCH | Recursively search through base directory. Default: `true`. |
