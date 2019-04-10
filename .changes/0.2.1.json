@@ -1,0 +1,6 @@
+[
+  {
+    "description": "Minor fixes to GitLab CI integration",
+    "type": "patch"
+  }
+]
