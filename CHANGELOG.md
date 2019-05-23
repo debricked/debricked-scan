@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 0.2.3
+
+- patch: Bumped version number due to new version of debricked/cli
+
 ## 0.2.2
 
 - patch: Only run scan once in GitLab CI integration
