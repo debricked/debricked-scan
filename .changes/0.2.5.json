@@ -1,0 +1,6 @@
+[
+  {
+    "description": "Made compatible with latest version of debricked/cli",
+    "type": "patch"
+  }
+]
