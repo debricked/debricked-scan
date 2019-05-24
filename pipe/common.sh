@@ -76,7 +76,7 @@ fi
 
 run ~/.composer/vendor/debricked/cli/bin/console debricked:scan ${SCAN_PARAMETERS} -v
 
-if [[ "${output}" =~ "[WARNING] Scan completed" && "${status}" == "0" ]]; then
+if [[ "${output}" =~ "[ERROR] Scan completed" && "${status}" == "0" ]]; then
   fail "Vulnerabilities detected"
 elif [[  "${status}" == "0" ]]; then
   success "Success! No vulnerabilities found at time time."
