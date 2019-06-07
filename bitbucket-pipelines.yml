@@ -9,8 +9,7 @@ test: &test
       - chmod a+x test/*.bats
       - bats test/test.bats
     services:
-      docker:
-        memory: 2048
+      - docker
 
 push: &push
   step:
@@ -30,3 +29,8 @@ pipelines:
     master:
       - <<: *test
       - <<: *push
+
+definitions:
+  services:
+    docker:
+      memory: 2048
