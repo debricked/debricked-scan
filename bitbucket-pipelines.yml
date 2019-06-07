@@ -9,7 +9,8 @@ test: &test
       - chmod a+x test/*.bats
       - bats test/test.bats
     services:
-      - docker
+      docker:
+        memory: 2048
 
 push: &push
   step:
