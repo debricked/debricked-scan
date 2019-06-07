@@ -1,0 +1,4 @@
+{
+  "type": "minor",
+  "description": "Updated debricked/cli to a version supporting unaffected vulnerabilities"
+}
