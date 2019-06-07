@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 0.3.0
+
+- minor: Updated debricked/cli to a version supporting unaffected vulnerabilities
+
 ## 0.2.5
 
 - patch: Made compatible with latest version of debricked/cli
