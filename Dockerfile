@@ -15,7 +15,7 @@ RUN echo "opcache.enable = 1" >> /usr/local/etc/php/php.ini \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer \
     && chmod +x /usr/bin/composer
 
-RUN composer global config minimum-stability beta && composer global require debricked/cli ^1.0.4 --prefer-stable
+RUN composer global config minimum-stability beta && composer global require debricked/cli ^1.1.0 --prefer-stable
 
 COPY pipe /
 COPY test /test
