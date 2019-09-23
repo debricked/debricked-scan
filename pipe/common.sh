@@ -70,6 +70,10 @@ DEBUG=${DEBUG:="false"}
 
 SCAN_PARAMETERS="${USERNAME} ${PASSWORD} ${PRODUCT} ${RELEASE} ${BASE_DIRECTORY} --recursive-file-search=${RECURSIVE_FILE_SEARCH}"
 
+if [ -z "$BRANCH" ]; then
+    SCAN_PARAMETERS="${SCAN_PARAMETERS} --branch-name=${BRANCH}"
+fi
+
 if [ ${EXCLUDED_DIRECTORIES+x} ]; then
     SCAN_PARAMETERS="${SCAN_PARAMETERS} --excluded-directories=${EXCLUDED_DIRECTORIES}"
 fi
