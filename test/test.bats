@@ -63,3 +63,44 @@ setup() {
 
     [[ $output =~ "Success! No vulnerabilities found at time time" && "$status" -eq 0 ]]
 }
+
+@test "Valid account, no branch, with vulnerabilities" {
+    touch .env.test.local
+    echo "USERNAME=$USERNAME" >> .env.test.local
+    echo "PASSWORD=$PASSWORD" >> .env.test.local
+    echo "BITBUCKET_REPO_OWNER=$BITBUCKET_REPO_OWNER" >> .env.test.local
+    echo "BITBUCKET_REPO_SLUG=$BITBUCKET_REPO_SLUG" >> .env.test.local
+    echo "BITBUCKET_COMMIT=$BITBUCKET_COMMIT" >> .env.test.local
+    
+    run docker run \
+        --env-file ./.env.test.local \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 1 ]]
+}
+
+@test "Valid account, no branch, without vulnerabilities" {
+    touch .env.test.local
+    echo "USERNAME=$USERNAME" >> .env.test.local
+    echo "PASSWORD=$PASSWORD" >> .env.test.local
+    echo "BITBUCKET_REPO_OWNER=$BITBUCKET_REPO_OWNER" >> .env.test.local
+    echo "BITBUCKET_REPO_SLUG=$BITBUCKET_REPO_SLUG" >> .env.test.local
+    echo "BITBUCKET_COMMIT=$BITBUCKET_COMMIT" >> .env.test.local
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test.local
+
+    run docker run \
+        --env-file ./.env.test.local \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ "Success! No vulnerabilities found at time time" && "$status" -eq 0 ]]
+}
