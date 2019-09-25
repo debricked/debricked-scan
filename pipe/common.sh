@@ -70,7 +70,7 @@ DEBUG=${DEBUG:="false"}
 
 SCAN_PARAMETERS="${USERNAME} ${PASSWORD} ${REPOSITORY} ${COMMIT} ${BASE_DIRECTORY} --recursive-file-search=${RECURSIVE_FILE_SEARCH}"
 
-if [ -z "$BRANCH" ]; then
+if [ ! -z "$BRANCH" ]; then
     SCAN_PARAMETERS="${SCAN_PARAMETERS} --branch-name=${BRANCH}"
 fi
 
