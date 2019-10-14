@@ -73,7 +73,7 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ $output =~ "Success! No vulnerabilities found at time time" && "SKIP_SCAN = $SKIP_SCAN"  && "$status" -eq 0 ]]
+    [[ $output =~ "Files were successfully uploaded, scan result will be available at https://app.debricked.com in a short while." && "SKIP_SCAN = $SKIP_SCAN"  && "$status" -eq 0 ]]
 }
 
 @test "Valid account, skip scan false" {
