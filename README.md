@@ -16,6 +16,7 @@ script:
       # RECURSIVE_FILE_SEARCH: "<boolean>" # Optional
       # EXCLUDED_DIRECTORIES: "<string>" # Optional
       # DEBUG: "<boolean>" # Optional
+      # SKIP_SCAN: "<boolean>" # Optional
 ```
 ## Variables
 
@@ -27,6 +28,7 @@ script:
 | RECURSIVE_FILE_SEARCH | Recursively search through base directory. Default: `true`. |
 | EXCLUDED_DIRECTORIES  | A comma separated list of directories to exclude. Default: A list of some common package managers' default modules/vendors directories. |
 | DEBUG                 | Turn on extra debug information. Default: `false`. |
+| SKIP_SCAN             | Upload the dependency files automatically when pushing code, without getting the results of the scan in the pipeline. Default: `false`. |
 
 _(*) = required variable._
 
@@ -56,6 +58,7 @@ script:
       RECURSIVE_FILE_SEARCH: "false"
       EXCLUDED_DIRECTORIES: "target,vendor"
       DEBUG: "true"
+      SKIP_SCAN: "true"
 ```
 
 An example repository using this pipe can be found at https://bitbucket.org/debricked/example-use-of-debricked-pipe/src/master/.
