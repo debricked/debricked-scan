@@ -8,7 +8,7 @@ if [[ ! -f /ci_runned ]] ; then
     COMMIT="${CI_COMMIT_SHA}"
     BRANCH="${CI_COMMIT_REF_NAME}"
     BASE_DIRECTORY=${BASE_DIRECTORY:=$CI_PROJECT_DIR}
-
+    SKIP_SCAN=${SKIP_SCAN}
     source "$(dirname "$0")/common.sh"
 fi
 
