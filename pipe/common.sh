@@ -82,7 +82,7 @@ else
 fi
 
 if [[ "${SKIP_SCAN}" == "true" && "${status}" == "0" ]]; then
-  success  "Files were successfully uploaded, scan result will be available at https://app.debricked.com in a short while."
+  success "Files were successfully uploaded, scan result will be available at https://app.debricked.com in a short while."
 elif [[ "${output}" =~ "[ERROR] Scan completed" && "${status}" == "0" ]]; then
   fail "Vulnerabilities detected"
 elif [[  "${status}" == "0" ]]; then
