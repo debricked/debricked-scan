@@ -90,22 +90,3 @@ setup() {
 
     [[ $output =~ "Success! No vulnerabilities found at time time" && "SKIP_SCAN = $SKIP_SCAN"  && "$status" -eq 0 ]]
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

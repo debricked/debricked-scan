@@ -28,7 +28,7 @@ script:
 | RECURSIVE_FILE_SEARCH | Recursively search through base directory. Default: `true`. |
 | EXCLUDED_DIRECTORIES  | A comma separated list of directories to exclude. Default: A list of some common package managers' default modules/vendors directories. |
 | DEBUG                 | Turn on extra debug information. Default: `false`. |
-| SKIP_SCAN             | Upload the dependency files automatically when pushing code, without getting the results of the scan in the pipeline.. Default: `false`. |
+| SKIP_SCAN             | Upload the dependency files automatically when pushing code, without getting the results of the scan in the pipeline. Default: `false`. |
 
 _(*) = required variable._
 
