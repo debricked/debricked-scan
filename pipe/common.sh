@@ -74,7 +74,11 @@ if [ ${EXCLUDED_DIRECTORIES+x} ]; then
     SCAN_PARAMETERS="${SCAN_PARAMETERS} --excluded-directories=${EXCLUDED_DIRECTORIES}"
 fi
 
-run ~/.composer/vendor/debricked/cli/bin/console debricked:scan ${SCAN_PARAMETERS} -v
+if [[ "${SKIP_SCAN}" == "1" ]]; then
+  run ~/.composer/vendor/debricked/cli/bin/console debricked:find-and-upload-files ${SCAN_PARAMETERS} -v
+else
+  run ~/.composer/vendor/debricked/cli/bin/console debricked:scan ${SCAN_PARAMETERS} -v
+fi
 
 if [[ "${output}" =~ "[ERROR] Scan completed" && "${status}" == "0" ]]; then
   fail "Vulnerabilities detected"
