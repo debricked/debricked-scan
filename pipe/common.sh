@@ -67,6 +67,7 @@ PASSWORD=${PASSWORD:?'PASSWORD variable missing.'}
 BASE_DIRECTORY=${BASE_DIRECTORY:=""}
 RECURSIVE_FILE_SEARCH=${RECURSIVE_FILE_SEARCH:="true"}
 DEBUG=${DEBUG:="false"}
+SKIP_SCAN=${SKIP_SCAN:="false"}
 
 SCAN_PARAMETERS="${USERNAME} ${PASSWORD} ${PRODUCT} ${RELEASE} ${BASE_DIRECTORY} --recursive-file-search=${RECURSIVE_FILE_SEARCH}"
 
@@ -74,7 +75,7 @@ if [ ${EXCLUDED_DIRECTORIES+x} ]; then
     SCAN_PARAMETERS="${SCAN_PARAMETERS} --excluded-directories=${EXCLUDED_DIRECTORIES}"
 fi
 
-if [[ "${SKIP_SCAN}" == "1" ]]; then
+if [[ "${SKIP_SCAN}" == "true" ]]; then
   run ~/.composer/vendor/debricked/cli/bin/console debricked:find-and-upload-files ${SCAN_PARAMETERS} -v
 else
   run ~/.composer/vendor/debricked/cli/bin/console debricked:scan ${SCAN_PARAMETERS} -v
