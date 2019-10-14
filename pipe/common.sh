@@ -86,7 +86,7 @@ if [[ "${SKIP_SCAN}" == "true" && "${status}" == "0" ]]; then
 elif [[ "${output}" =~ "[ERROR] Scan completed" && "${status}" == "0" ]]; then
   fail "Vulnerabilities detected"
 elif [[  "${status}" == "0" ]]; then
-  success "Success! No vulnerabilities found at time."
+  success "Success! No vulnerabilities found at this time."
 else
   fail "Unknown error, please view pipe output for more details."
 fi
