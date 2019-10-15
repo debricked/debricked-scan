@@ -1,4 +1,4 @@
 {
   "type": "minor", 
-  "description": "Add support for branches"
+  "description": "Add support for branches and an option to skip the scan, just uploading dependency files"
 }
