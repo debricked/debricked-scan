@@ -21,6 +21,7 @@ setup() {
     echo "BITBUCKET_REPO_OWNER=$BITBUCKET_REPO_OWNER" >> .env.test
     echo "BITBUCKET_REPO_SLUG=$BITBUCKET_REPO_SLUG" >> .env.test
     echo "BITBUCKET_COMMIT=$BITBUCKET_COMMIT" >> .env.test
+    echo "BITBUCKET_BRANCH=$BITBUCKET_BRANCH" >> .env.test
 
     run docker run \
         --env-file ./.env.test \
@@ -90,4 +91,35 @@ setup() {
     echo "Output: $output"
 
     [[ $output =~ "Success! No vulnerabilities found at this time" && "SKIP_SCAN = $SKIP_SCAN"  && "$status" -eq 0 ]]
+}
+
+@test "Valid account, with branch, with vulnerabilities" {
+    echo "BITBUCKET_BRANCH=$BITBUCKET_BRANCH" >> .env.test.local
+    
+    run docker run \
+        --env-file ./.env.test.local \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 1 ]]
+}
+
+@test "Valid account, with branch, without vulnerabilities" {
+    echo "BITBUCKET_BRANCH=$BITBUCKET_BRANCH" >> .env.test.local
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test.local
+
+    run docker run \
+        --env-file ./.env.test.local \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ "Success! No vulnerabilities found at time time" && "$status" -eq 0 ]]
 }
