@@ -85,9 +85,10 @@ else
   run ~/.composer/vendor/debricked/cli/bin/console debricked:scan ${SCAN_PARAMETERS} -v
 fi
 
+vulnerabilitiesOutputRegex='\[ERROR\]\s+Scan completed'
 if [[ "${SKIP_SCAN}" == "true" && "${status}" == "0" ]]; then
   success "Files were successfully uploaded, scan result will be available at https://app.debricked.com in a short while."
-elif [[ "${output}" =~ "[ERROR] Scan completed" && "${status}" == "0" ]]; then
+elif [[ "${output}" =~ $vulnerabilitiesOutputRegex && "${status}" == "0" ]]; then
   fail "Vulnerabilities detected"
 elif [[  "${status}" == "0" ]]; then
   success "Success! No vulnerabilities found at this time."

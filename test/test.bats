@@ -62,6 +62,7 @@ setup() {
 
     [[ $output =~ "Success! No vulnerabilities found at this time" && "$status" -eq 0 ]]
 }
+
 @test "Valid account, skip scan true" {
     echo "SKIP_SCAN=true" >> .env.test.local
 
@@ -121,5 +122,5 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ $output =~ "Success! No vulnerabilities found at time time" && "$status" -eq 0 ]]
+    [[ $output =~ "Success! No vulnerabilities found at this time" && "$status" -eq 0 ]]
 }
