@@ -79,6 +79,7 @@ setup() {
 
 @test "Valid account, skip scan false" {
     echo "SKIP_SCAN=false" >> .env.test.local
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test.local
 
     run docker run \
         --env-file ./.env.test.local \
