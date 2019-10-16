@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 0.4.0
+
+- minor: Add support for branches and an option to skip the scan, just uploading dependency files
+
 ## 0.3.0
 
 - minor: Updated debricked/cli to a version supporting unaffected vulnerabilities
