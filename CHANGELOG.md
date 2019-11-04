@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 0.4.1
+
+- patch: Bumped version number due to new version of debricked/cli
+
 ## 0.4.0
 
 - minor: Add support for branches and an option to skip the scan, just uploading dependency files
