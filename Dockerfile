@@ -21,4 +21,4 @@ COPY pipe /
 COPY test /test
 RUN chmod a+x /*.sh
 
-ENTRYPOINT ["/pipe.sh"]
+ENTRYPOINT ["/azure-devops.sh"]
