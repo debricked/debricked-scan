@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 0.5.0
+
+- minor: Added support for link to dependency file
+
 ## 0.4.2
 
 - patch: Added support for Azure DevOps. No changes to existing integrations.

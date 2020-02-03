@@ -1,0 +1,6 @@
+[
+  {
+    "description": "Added support for link to dependency file",
+    "type": "minor"
+  }
+]
