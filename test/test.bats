@@ -11,8 +11,7 @@ setup() {
   echo "PASSWORD=$PASSWORD" >> .env.test.local
   echo "BITBUCKET_REPO_OWNER=$BITBUCKET_REPO_OWNER" >> .env.test.local
   echo "BITBUCKET_REPO_SLUG=$BITBUCKET_REPO_SLUG" >> .env.test.local
-  echo "REPOSITORY_URL=$REPOSITORY_URL" >> .env.test.local
-  echo "INTEGRATION_NAME=$INTEGRATION_NAME" >> .env.test.local
+  echo "BITBUCKET_GIT_HTTP_ORIGIN=$BITBUCKET_GIT_HTTP_ORIGIN" >> .env.test.local
   echo "BITBUCKET_COMMIT=$BITBUCKET_COMMIT" >> .env.test.local
 
 }
@@ -23,8 +22,7 @@ setup() {
     echo "PASSWORD=bar..." >> .env.test
     echo "BITBUCKET_REPO_OWNER=$BITBUCKET_REPO_OWNER" >> .env.test
     echo "BITBUCKET_REPO_SLUG=$BITBUCKET_REPO_SLUG" >> .env.test
-    echo "REPOSITORY_URL=$BITBUCKET_GIT_HTTP_ORIGIN" >> .env.test
-    echo "INTEGRATION_NAME=bitbucket1" >> .env.test
+    echo "BITBUCKET_GIT_HTTP_ORIGIN=$BITBUCKET_GIT_HTTP_ORIGIN" >> .env.test
     echo "BITBUCKET_COMMIT=$BITBUCKET_COMMIT" >> .env.test
     echo "BITBUCKET_BRANCH=$BITBUCKET_BRANCH" >> .env.test
 
