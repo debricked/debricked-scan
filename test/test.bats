@@ -23,6 +23,7 @@ setup() {
     echo "PASSWORD=bar..." >> .env.test
     echo "BITBUCKET_REPO_OWNER=$BITBUCKET_REPO_OWNER" >> .env.test
     echo "BITBUCKET_REPO_SLUG=$BITBUCKET_REPO_SLUG" >> .env.test
+    echo "REPOSITORY_URL=$REPOSITORY_URL" >> .env.test
     echo "BITBUCKET_COMMIT=$BITBUCKET_COMMIT" >> .env.test
     echo "BITBUCKET_BRANCH=$BITBUCKET_BRANCH" >> .env.test
 
