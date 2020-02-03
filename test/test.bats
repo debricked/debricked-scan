@@ -26,7 +26,6 @@ setup() {
     echo "BITBUCKET_COMMIT=$BITBUCKET_COMMIT" >> .env.test
     echo "BITBUCKET_BRANCH=$BITBUCKET_BRANCH" >> .env.test
 
-
     run docker run \
         --env-file ./.env.test \
         -v $(pwd):$(pwd) \
@@ -36,7 +35,7 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ "$status" -eq 1 && $output =~ "Bad credentials" ]]
+    [[ "$status" -eq 1 && $output =~ "Invalid credentials." ]]
 }
 
 @test "Valid account, with vulnerabilities" {
