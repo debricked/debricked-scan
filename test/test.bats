@@ -11,7 +11,9 @@ setup() {
   echo "PASSWORD=$PASSWORD" >> .env.test.local
   echo "BITBUCKET_REPO_OWNER=$BITBUCKET_REPO_OWNER" >> .env.test.local
   echo "BITBUCKET_REPO_SLUG=$BITBUCKET_REPO_SLUG" >> .env.test.local
+  echo "BITBUCKET_GIT_HTTP_ORIGIN=$BITBUCKET_GIT_HTTP_ORIGIN" >> .env.test.local
   echo "BITBUCKET_COMMIT=$BITBUCKET_COMMIT" >> .env.test.local
+
 }
 
 @test "Invalid account" {
@@ -20,6 +22,7 @@ setup() {
     echo "PASSWORD=bar..." >> .env.test
     echo "BITBUCKET_REPO_OWNER=$BITBUCKET_REPO_OWNER" >> .env.test
     echo "BITBUCKET_REPO_SLUG=$BITBUCKET_REPO_SLUG" >> .env.test
+    echo "BITBUCKET_GIT_HTTP_ORIGIN=$BITBUCKET_GIT_HTTP_ORIGIN" >> .env.test
     echo "BITBUCKET_COMMIT=$BITBUCKET_COMMIT" >> .env.test
     echo "BITBUCKET_BRANCH=$BITBUCKET_BRANCH" >> .env.test
 
@@ -32,7 +35,7 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ "$status" -eq 1 && $output =~ "Bad credentials" ]]
+    [[ "$status" -eq 1 && $output =~ "Invalid credentials." ]]
 }
 
 @test "Valid account, with vulnerabilities" {
