@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 0.5.1
+
+- patch: Bumped version number due to new version of debricked/cli 3.0.2
+
 ## 0.5.0
 
 - minor: Added support for link to dependency file
