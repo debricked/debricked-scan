@@ -48,7 +48,22 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 1 ]]
+    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 1 && $output =~ "upload-all-files" ]]
+}
+
+@test "Valid account, with vulnerabilities, enabled upload-all-files option" {
+    echo "UPLOAD_ALL_FILES=true" >> .env.test.local
+
+    run docker run \
+        --env-file ./.env.test.local \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 1 && $output != *"upload-all-files"* ]]
 }
 
 @test "Valid account, without vulnerabilities" {
@@ -63,7 +78,7 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ $output =~ "Success! No vulnerabilities found at this time" && "$status" -eq 0 ]]
+    [[ $output =~ "Success! No vulnerabilities found at this time" && "$status" -eq 0 && $output != *"upload-all-files"* ]]
 }
 
 @test "Valid account, skip scan true" {

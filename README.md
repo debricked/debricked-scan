@@ -29,6 +29,7 @@ script:
 | EXCLUDED_DIRECTORIES  | A comma separated list of directories to exclude. Default: A list of some common package managers' default modules/vendors directories. |
 | DEBUG                 | Turn on extra debug information. Default: `false`. |
 | SKIP_SCAN             | Upload the dependency files automatically when pushing code, without getting the results of the scan in the pipeline. Default: `false`. |
+| UPLOAD_ALL_FILES      | If set to true, all files will be uploaded, not just your dependency files. Needed for some dependency formats. Default: `false`. |
 
 _(*) = required variable._
 
@@ -59,6 +60,7 @@ script:
       EXCLUDED_DIRECTORIES: "target,vendor"
       DEBUG: "true"
       SKIP_SCAN: "true"
+      UPLOAD_ALL_FILES: "true"
 ```
 
 An example repository using this pipe can be found at https://bitbucket.org/debricked/example-use-of-debricked-pipe/src/master/.
