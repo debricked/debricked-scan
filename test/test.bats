@@ -63,10 +63,10 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 1 && $output != *"upload-all-files"* ]]
+    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 1 && ! $output =~ "\supload-all-files\s+option" ]]
 }
 
-@test "Valid account, without vulnerabilities" {
+@test "Valid account, without vulnerabilities, without Gradle files" {
     echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test.local
 
     run docker run \
