@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 0.5.3
+
+- patch: Added support for 'upload all files' option.
+
 ## 0.5.2
 
 - patch: Bumped version number due to new version of debricked/cli 3.0.3

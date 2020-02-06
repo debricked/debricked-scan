@@ -1,0 +1,6 @@
+[
+  {
+    "description": "Added support for 'upload all files' option.",
+    "type": "patch"
+  }
+]
