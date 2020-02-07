@@ -17,6 +17,7 @@ script:
       # EXCLUDED_DIRECTORIES: "<string>" # Optional
       # DEBUG: "<boolean>" # Optional
       # SKIP_SCAN: "<boolean>" # Optional
+      # UPLOAD_ALL_FILES: "<boolean>" # Optional
 ```
 ## Variables
 
