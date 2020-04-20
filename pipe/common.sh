@@ -85,9 +85,9 @@ if [[ "${UPLOAD_ALL_FILES}" == "true" ]]; then
 fi
 
 if [[ "${SKIP_SCAN}" == "true" ]]; then
-  run ~/.composer/vendor/debricked/cli/bin/console debricked:find-and-upload-files ${SCAN_PARAMETERS} -v
+  run /root/.composer/vendor/debricked/cli/bin/console debricked:find-and-upload-files ${SCAN_PARAMETERS} -v
 else
-  run ~/.composer/vendor/debricked/cli/bin/console debricked:scan ${SCAN_PARAMETERS} -v
+  run /root/.composer/vendor/debricked/cli/bin/console debricked:scan ${SCAN_PARAMETERS} -v
 fi
 
 vulnerabilitiesOutputRegex='\[ERROR\]\s+Scan completed'
