@@ -11,7 +11,7 @@ if [[ ! -f /ci_runned ]] ; then
     REPOSITORY_URL=${CI_PROJECT_URL}
     INTEGRATION_NAME=gitlab
     SKIP_SCAN=${SKIP_SCAN}
+
+    [[ $CI ]] && touch /ci_runned
     source "$(dirname "$0")/common.sh"
 fi
-
-[[ $CI ]] && touch /ci_runned
