@@ -1,4 +1,0 @@
-{
-  "type": "patch",
-  "description": "Fix Gitlab integration running scan twice for each push in some occasions."
-}

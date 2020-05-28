@@ -1,6 +1,11 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 0.6.0
+
+- minor: Add support for Github Actions.
+- patch: Fix Gitlab integration running scan twice for each push in some occasions.
+
 ## 0.5.3
 
 - patch: Added support for 'upload all files' option.
