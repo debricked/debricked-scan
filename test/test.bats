@@ -6,14 +6,15 @@ setup() {
   echo "Building image..."
   docker build -t ${DOCKER_IMAGE}:test .
 
+  random_hash=$(openssl rand -hex 20)
+
   touch .env.test.local
   echo "USERNAME=$USERNAME" > .env.test.local
   echo "PASSWORD=$PASSWORD" >> .env.test.local
   echo "BITBUCKET_REPO_OWNER=$BITBUCKET_REPO_OWNER" >> .env.test.local
   echo "BITBUCKET_REPO_SLUG=$BITBUCKET_REPO_SLUG" >> .env.test.local
   echo "BITBUCKET_GIT_HTTP_ORIGIN=$BITBUCKET_GIT_HTTP_ORIGIN" >> .env.test.local
-  echo "BITBUCKET_COMMIT=$BITBUCKET_COMMIT" >> .env.test.local
-
+  echo "BITBUCKET_COMMIT=$random_hash" >> .env.test.local
 }
 
 @test "Invalid account" {
