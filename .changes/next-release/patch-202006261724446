@@ -1,0 +1,4 @@
+{
+  "type": "patch",
+  "description": "New debricked-cli version, supports uploading adjacent dependency tree files."
+}
