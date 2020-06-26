@@ -1,4 +1,0 @@
-{
-  "type": "major",
-  "description": "Upgrade required for scans to continue to work! Support dependency files with wildcards, such as *.csproj and *.bzl and more."
-}
