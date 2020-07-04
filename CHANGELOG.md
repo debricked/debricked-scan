@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 1.0.2
+
+- patch: Fix branch and tag name detection for Github Action.
+
 ## 1.0.1
 
 - patch: New debricked-cli version, supports uploading adjacent dependency tree files.

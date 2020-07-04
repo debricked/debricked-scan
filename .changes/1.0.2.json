@@ -1,0 +1,6 @@
+[
+  {
+    "description": "Fix branch and tag name detection for Github Action.",
+    "type": "patch"
+  }
+]
