@@ -1,0 +1,10 @@
+[
+  {
+    "description": "Fix Gitlab integration running scan twice for each push in some occasions.",
+    "type": "patch"
+  },
+  {
+    "description": "Add support for Github Actions.",
+    "type": "minor"
+  }
+]

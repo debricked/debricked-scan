@@ -8,7 +8,7 @@ Add the following snippet to the script section of your `bitbucket-pipelines.yml
 
 ```yaml
 script:
-  - pipe: debricked/debricked-scan:0.4.2
+  - pipe: debricked/debricked-scan:1.0.2
     variables:
       USERNAME: "<string>"
       PASSWORD: "<string>"
@@ -17,18 +17,20 @@ script:
       # EXCLUDED_DIRECTORIES: "<string>" # Optional
       # DEBUG: "<boolean>" # Optional
       # SKIP_SCAN: "<boolean>" # Optional
+      # UPLOAD_ALL_FILES: "<boolean>" # Optional
 ```
 ## Variables
 
 | Variable              | Usage                                                       |
 | --------------------- | ----------------------------------------------------------- |
-| USERNAME (*)          | Your Debricked username. Don't have an account? No worries! Get your free 30-day trial at [https://seconds.debricked.com/en/register](https://seconds.debricked.com/en/register?utm_source=bitbucket_pipe) |
+| USERNAME (*)          | Your Debricked username. Don't have an account? No worries! Get your free 30-day trial at [https://app.debricked.com/en/register](https://app.debricked.com/en/register?utm_source=bitbucket_pipe) |
 | PASSWORD (*)          | Your Debricked password |
 | BASE_DIRECTORY        | Base directory to scan through. Default: Empty string (repository root). |
 | RECURSIVE_FILE_SEARCH | Recursively search through base directory. Default: `true`. |
 | EXCLUDED_DIRECTORIES  | A comma separated list of directories to exclude. Default: A list of some common package managers' default modules/vendors directories. |
 | DEBUG                 | Turn on extra debug information. Default: `false`. |
 | SKIP_SCAN             | Upload the dependency files automatically when pushing code, without getting the results of the scan in the pipeline. Default: `false`. |
+| UPLOAD_ALL_FILES      | If set to true, all files will be uploaded, not just your dependency files. Needed for some dependency formats. Default: `false`. |
 
 _(*) = required variable._
 
@@ -40,7 +42,7 @@ Basic example:
 
 ```yaml
 script:
-  - pipe: debricked/debricked-scan:0.4.2
+  - pipe: debricked/debricked-scan:1.0.2
     variables:
       USERNAME: "foo"
       PASSWORD: "bar"
@@ -50,7 +52,7 @@ Advanced example:
 
 ```yaml
 script:
-  - pipe: debricked/debricked-scan:0.4.2
+  - pipe: debricked/debricked-scan:1.0.2
     variables:
       USERNAME: "foo"
       PASSWORD: "bar"
@@ -59,6 +61,7 @@ script:
       EXCLUDED_DIRECTORIES: "target,vendor"
       DEBUG: "true"
       SKIP_SCAN: "true"
+      UPLOAD_ALL_FILES: "true"
 ```
 
 An example repository using this pipe can be found at https://bitbucket.org/debricked/example-use-of-debricked-pipe/src/master/.

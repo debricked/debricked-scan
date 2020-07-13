@@ -6,14 +6,15 @@ setup() {
   echo "Building image..."
   docker build -t ${DOCKER_IMAGE}:test .
 
+  random_hash=$(openssl rand -hex 20)
+
   touch .env.test.local
   echo "USERNAME=$USERNAME" > .env.test.local
   echo "PASSWORD=$PASSWORD" >> .env.test.local
   echo "BITBUCKET_REPO_OWNER=$BITBUCKET_REPO_OWNER" >> .env.test.local
   echo "BITBUCKET_REPO_SLUG=$BITBUCKET_REPO_SLUG" >> .env.test.local
   echo "BITBUCKET_GIT_HTTP_ORIGIN=$BITBUCKET_GIT_HTTP_ORIGIN" >> .env.test.local
-  echo "BITBUCKET_COMMIT=$BITBUCKET_COMMIT" >> .env.test.local
-
+  echo "BITBUCKET_COMMIT=$random_hash" >> .env.test.local
 }
 
 @test "Invalid account" {
@@ -48,10 +49,25 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 0 ]]
+    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 0 && $output =~ "upload-all-files" ]]
 }
 
-@test "Valid account, without vulnerabilities" {
+@test "Valid account, with vulnerabilities, enabled upload-all-files option" {
+    echo "UPLOAD_ALL_FILES=true" >> .env.test.local
+
+    run docker run \
+        --env-file ./.env.test.local \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 1 && ! $output =~ "\supload-all-files\s+option" ]]
+}
+
+@test "Valid account, without vulnerabilities, without Gradle files" {
     echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test.local
 
     run docker run \
@@ -63,7 +79,7 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ $output =~ "Success! No vulnerabilities found at this time" && "$status" -eq 0 ]]
+    [[ $output =~ "Success! No vulnerabilities found at this time" && "$status" -eq 0 && $output != *"upload-all-files"* ]]
 }
 
 @test "Valid account, skip scan true" {

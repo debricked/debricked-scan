@@ -1,0 +1,6 @@
+[
+  {
+    "description": "Bumped version number due to new version of debricked/cli 3.0.2",
+    "type": "patch"
+  }
+]

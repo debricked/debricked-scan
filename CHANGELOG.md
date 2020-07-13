@@ -1,6 +1,39 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 1.0.2
+
+- patch: Fix branch and tag name detection for Github Action.
+
+## 1.0.1
+
+- patch: New debricked-cli version, supports uploading adjacent dependency tree files.
+
+## 1.0.0
+
+- major: Upgrade required for scans to continue to work! Support dependency files with wildcards, such as *.csproj and *.bzl and more.
+
+## 0.6.0
+
+- minor: Add support for Github Actions.
+- patch: Fix Gitlab integration running scan twice for each push in some occasions.
+
+## 0.5.3
+
+- patch: Added support for 'upload all files' option.
+
+## 0.5.2
+
+- patch: Bumped version number due to new version of debricked/cli 3.0.3
+
+## 0.5.1
+
+- patch: Bumped version number due to new version of debricked/cli 3.0.2
+
+## 0.5.0
+
+- minor: Added support for link to dependency file
+
 ## 0.4.2
 
 - patch: Added support for Azure DevOps. No changes to existing integrations.
