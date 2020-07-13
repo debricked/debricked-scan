@@ -64,7 +64,7 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 1 && ! $output =~ "\supload-all-files\s+option" ]]
+    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 0 && ! $output =~ "\supload-all-files\s+option" ]]
 }
 
 @test "Valid account, without vulnerabilities, without Gradle files" {
