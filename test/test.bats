@@ -48,7 +48,7 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 1 ]]
+    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 0 ]]
 }
 
 @test "Valid account, without vulnerabilities" {
@@ -109,7 +109,7 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 1 ]]
+    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 0 ]]
 }
 
 @test "Valid account, with branch, without vulnerabilities" {
