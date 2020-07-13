@@ -17,6 +17,7 @@ gray="\\e[37m"
 blue="\\e[36m"
 red="\\e[31m"
 green="\\e[32m"
+yellow="\\e[33m"
 reset="\\e[0m"
 
 # Output information to the Pipelines log for the user
@@ -34,6 +35,8 @@ debug() {
 success() { echo -e "${green}✔ $*${reset}"; }
 # Output log information indicating failure and exit the Pipe script
 fail() { echo -e "${red}✖ $*${reset}"; exit 1; }
+# Output log information indicating neutral result
+neutral() { echo -e "${yellow}✔ $*${reset}"; }
 
 # Enable debug mode.
 enable_debug() {
@@ -94,7 +97,7 @@ vulnerabilitiesOutputRegex='\[ERROR\]\s+Scan completed'
 if [[ "${SKIP_SCAN}" == "true" && "${status}" == "0" ]]; then
   success "Files were successfully uploaded, scan result will be available at https://app.debricked.com in a short while."
 elif [[ "${output}" =~ $vulnerabilitiesOutputRegex && "${status}" == "0" ]]; then
-  fail "Vulnerabilities detected"
+  neutral "Vulnerabilities detected"
 elif [[  "${status}" == "0" ]]; then
   success "Success! No vulnerabilities found at this time."
 else

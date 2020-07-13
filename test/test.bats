@@ -49,7 +49,7 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 1 && $output =~ "upload-all-files" ]]
+    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 0 && $output =~ "upload-all-files" ]]
 }
 
 @test "Valid account, with vulnerabilities, enabled upload-all-files option" {
@@ -64,7 +64,7 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 1 && ! $output =~ "\supload-all-files\s+option" ]]
+    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 0 && ! $output =~ "\supload-all-files\s+option" ]]
 }
 
 @test "Valid account, without vulnerabilities, without Gradle files" {
@@ -125,7 +125,7 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 1 ]]
+    [[ $output =~ "Vulnerabilities detected" && "$status" -eq 0 ]]
 }
 
 @test "Valid account, with branch, without vulnerabilities" {
