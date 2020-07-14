@@ -1,4 +1,0 @@
-{
-  "type": "patch",
-  "description": "Pass pipeline checks with warning when vulnerabilities discovered"
-}

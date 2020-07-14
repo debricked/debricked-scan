@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 1.0.3
+
+- patch: Pass pipeline checks with warning when vulnerabilities discovered
+
 ## 1.0.2
 
 - patch: Fix branch and tag name detection for Github Action.
