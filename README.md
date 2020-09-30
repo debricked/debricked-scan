@@ -19,6 +19,9 @@ script:
       # SKIP_SCAN: "<boolean>" # Optional
       # UPLOAD_ALL_FILES: "<boolean>" # Optional
 ```
+
+You should mask your username and password in order to avoid revealing your login credentials in the pipeline, please refer to [our Bitbucket documentation](https://debricked.com/documentation/1.0/integrations/ci-build-systems/bitbucket).
+
 ## Variables
 
 | Variable              | Usage                                                       |
