@@ -87,6 +87,10 @@ if [[ "${UPLOAD_ALL_FILES}" == "true" ]]; then
     SCAN_PARAMETERS="${SCAN_PARAMETERS} --upload-all-files=${UPLOAD_ALL_FILES}"
 fi
 
+if [[ "${DISABLE_SNIPPET_SCAN}" == "true" ]]; then
+    SCAN_PARAMETERS="${SCAN_PARAMETERS} --disable-snippets"
+fi
+
 if [[ "${SKIP_SCAN}" == "true" ]]; then
   run /root/.composer/vendor/debricked/cli/bin/console debricked:find-and-upload-files ${SCAN_PARAMETERS} -v
 else
