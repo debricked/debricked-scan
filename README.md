@@ -18,6 +18,7 @@ script:
       # DEBUG: "<boolean>" # Optional
       # SKIP_SCAN: "<boolean>" # Optional
       # UPLOAD_ALL_FILES: "<boolean>" # Optional
+      # DISABLE_SNIPPET_SCAN: "<boolean>" # Optional
 ```
 
 You should mask your username and password in order to avoid revealing your login credentials in the pipeline, please refer to [our Bitbucket documentation](https://debricked.com/documentation/1.0/integrations/ci-build-systems/bitbucket).
@@ -33,7 +34,8 @@ You should mask your username and password in order to avoid revealing your logi
 | EXCLUDED_DIRECTORIES  | A comma separated list of directories to exclude. Default: A list of some common package managers' default modules/vendors directories. |
 | DEBUG                 | Turn on extra debug information. Default: `false`. |
 | SKIP_SCAN             | Upload the dependency files automatically when pushing code, without getting the results of the scan in the pipeline. Default: `false`. |
-| UPLOAD_ALL_FILES      | If set to true, all files will be uploaded, not just your dependency files. Needed for some dependency formats. Default: `false`. |
+| UPLOAD_ALL_FILES      | If set to "true", all files will be uploaded, not just your dependency files. Needed for some dependency formats. Default: `false`. |
+| DISABLE_SNIPPET_SCAN  | If set to "true", snippet analysis will be disabled and no anonymised functions will be sent to Debricked. License detection will be limited if this option is enabled. Default: `false`. |
 
 _(*) = required variable._
 
