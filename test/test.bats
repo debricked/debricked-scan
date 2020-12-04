@@ -143,3 +143,18 @@ setup() {
 
     [[ $output =~ "Success! No vulnerabilities found at this time" && "$status" -eq 0 ]]
 }
+
+@test "Disable snippet scan does indeed disable snippet scan" {
+    echo "DISABLE_SNIPPET_SCAN=true" >> .env.test.local
+
+    run docker run \
+        --env-file ./.env.test.local \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ "--disable-snippets" && "$status" -eq 0 ]]
+}
