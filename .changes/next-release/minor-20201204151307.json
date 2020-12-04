@@ -1,4 +1,0 @@
-{
-  "type": "minor",
-  "description": "Upgrade to debricked-cli 5.0.0, add setting to disable snippet scan."
-}

@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 1.1.0
+
+- minor: Upgrade to debricked-cli 5.0.0, add setting to disable snippet scan.
+
 ## 1.0.3
 
 - patch: Pass pipeline checks with warning when vulnerabilities discovered
@@ -85,4 +89,3 @@ Note: version releases in the 0.x.y range may introduce breaking changes.
 ## 0.1.0
 
 - minor: Initial release
-
