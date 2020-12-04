@@ -2,7 +2,7 @@ FROM php:7.4-cli-alpine
 
 RUN apk update && apk add bash libzip-dev
 
-RUN docker-php-ext-configure zip --with-libzip=/usr/include && docker-php-ext-install zip opcache
+RUN docker-php-ext-install zip opcache
 
 RUN echo "opcache.enable = 1" >> /usr/local/etc/php/php.ini \
     && echo "opcache.enable_cli = 1" >> /usr/local/etc/php/php.ini \
