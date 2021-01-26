@@ -1,0 +1,6 @@
+[
+  {
+    "description": "Fix scanning for repo names containing spaces",
+    "type": "patch"
+  }
+]
