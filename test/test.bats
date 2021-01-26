@@ -158,3 +158,30 @@ setup() {
 
     [[ $output =~ "--disable-snippets" && "$status" -eq 0 ]]
 }
+
+@test "Can handle repos with space in name" {
+    random_hash=$(openssl rand -hex 20)
+
+    touch .env.test
+    echo "USERNAME=$USERNAME" > .env.test
+    echo "PASSWORD=$PASSWORD" >> .env.test
+    echo "BITBUCKET_REPO_OWNER=$BITBUCKET_REPO_OWNER" >> .env.test
+
+    # make a repo with space in name here. 
+    echo 'BITBUCKET_REPO_SLUG="space repo"' >> .env.test
+    
+    echo "BITBUCKET_GIT_HTTP_ORIGIN=$BITBUCKET_GIT_HTTP_ORIGIN" >> .env.test
+    echo "BITBUCKET_COMMIT=$random_hash" >> .env.test
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ "Success! No vulnerabilities found at this time" && "$status" -eq 0 && $output != *"upload-all-files"* ]]
+}

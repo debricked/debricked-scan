@@ -73,28 +73,39 @@ DEBUG=${DEBUG:="false"}
 REPOSITORY_URL=${REPOSITORY_URL:=""}
 UPLOAD_ALL_FILES=${UPLOAD_ALL_FILES:="false"}
 SKIP_SCAN=${SKIP_SCAN:="false"}
-SCAN_PARAMETERS="${USERNAME} ${PASSWORD} ${REPOSITORY} ${COMMIT}  ${REPOSITORY_URL} ${INTEGRATION_NAME} ${BASE_DIRECTORY} --recursive-file-search=${RECURSIVE_FILE_SEARCH}"
+
+SCAN_PARAMETERS=()
+SCAN_PARAMETERS+=("${USERNAME}")
+SCAN_PARAMETERS+=("${PASSWORD}")
+SCAN_PARAMETERS+=("${REPOSITORY}")
+SCAN_PARAMETERS+=("${COMMIT}")
+SCAN_PARAMETERS+=("${REPOSITORY_URL}")
+SCAN_PARAMETERS+=("${INTEGRATION_NAME}")
+SCAN_PARAMETERS+=("${BASE_DIRECTORY}")
+SCAN_PARAMETERS+=(--recursive-file-search="${RECURSIVE_FILE_SEARCH}")
 
 if [ ! -z "$BRANCH" ]; then
-    SCAN_PARAMETERS="${SCAN_PARAMETERS} --branch-name=${BRANCH}"
+    SCAN_PARAMETERS+=(--branch-name="${BRANCH}")
 fi
 
 if [ ${EXCLUDED_DIRECTORIES+x} ]; then
-    SCAN_PARAMETERS="${SCAN_PARAMETERS} --excluded-directories=${EXCLUDED_DIRECTORIES}"
+    SCAN_PARAMETERS+=(--excluded-directories="${EXCLUDED_DIRECTORIES}")
 fi
 
 if [[ "${UPLOAD_ALL_FILES}" == "true" ]]; then
-    SCAN_PARAMETERS="${SCAN_PARAMETERS} --upload-all-files=${UPLOAD_ALL_FILES}"
+    SCAN_PARAMETERS+=(--upload-all-files="${UPLOAD_ALL_FILES}")
 fi
 
 if [[ "${DISABLE_SNIPPET_SCAN}" == "true" ]]; then
-    SCAN_PARAMETERS="${SCAN_PARAMETERS} --disable-snippets"
+    SCAN_PARAMETERS+=(--disable-snippets)
 fi
 
+SCAN_PARAMETERS+=(-v)
+
 if [[ "${SKIP_SCAN}" == "true" ]]; then
-  run /root/.composer/vendor/debricked/cli/bin/console debricked:find-and-upload-files ${SCAN_PARAMETERS} -v
+  run /root/.composer/vendor/debricked/cli/bin/console debricked:find-and-upload-files "${SCAN_PARAMETERS[@]}"
 else
-  run /root/.composer/vendor/debricked/cli/bin/console debricked:scan ${SCAN_PARAMETERS} -v
+  run /root/.composer/vendor/debricked/cli/bin/console debricked:scan "${SCAN_PARAMETERS[@]}"
 fi
 
 vulnerabilitiesOutputRegex='\[ERROR\]\s+Scan completed'
