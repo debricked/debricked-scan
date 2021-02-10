@@ -22,6 +22,16 @@ push: &push
     services:
       - docker
 
+mirror: &mirror
+  step:
+    name: Mirror to GitHub
+    script:
+      - rm -rf ..?* .[!.]* *
+      - ls -la "$BITBUCKET_CLONE_DIR"
+      - git clone "$BITBUCKET_GIT_SSH_ORIGIN" "$BITBUCKET_CLONE_DIR"
+      - ls -la
+      - git push --mirror git@github.com:debricked/debricked-scan.git
+
 pipelines:
   default:
     - <<: *test
@@ -29,6 +39,7 @@ pipelines:
     master:
       - <<: *test
       - <<: *push
+      - <<: *mirror
 
 definitions:
   services:
