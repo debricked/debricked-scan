@@ -38,8 +38,8 @@ pipelines:
   branches:
     master:
       - <<: *test
-      - <<: *push
       - <<: *mirror
+      - <<: *push
 
 definitions:
   services:
