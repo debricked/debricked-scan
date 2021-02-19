@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 1.1.4
+
+- patch: Update debricked-cli
+
 ## 1.1.3
 
 - patch: Add support for policy engine.
