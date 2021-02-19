@@ -1,6 +1,11 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 1.1.3
+
+- patch: Add support for policy engine.
+- patch: Minor fixes to policy engine support
+
 ## 1.1.2
 
 - patch: Use proper organization name for Azure DevOps
