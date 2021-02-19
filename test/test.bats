@@ -82,67 +82,67 @@ setup() {
     [[ $output =~ "Success! No vulnerabilities found at this time" && "$status" -eq 0 && $output != *"upload-all-files"* ]]
 }
 
-@test "Valid account, without vulnerabilities, without Gradle files, pipeline warning" {
-    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test.local
-    echo "BITBUCKET_REPO_SLUG=${BITBUCKET_REPO_SLUG}-pipeline-warning-no-vuln" >> .env.test.local
+#@test "Valid account, without vulnerabilities, without Gradle files, pipeline warning" {
+#    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test.local
+#    echo "BITBUCKET_REPO_SLUG=${BITBUCKET_REPO_SLUG}-pipeline-warning-no-vuln" >> .env.test.local
+#
+#    run docker run \
+#        --env-file ./.env.test.local \
+#        -v $(pwd):$(pwd) \
+#        -w $(pwd) \
+#        ${DOCKER_IMAGE}:test
+#
+#    echo "Status: $status"
+#    echo "Output: $output"
+#
+#    [[ $output =~ "No vulnerabilities found at this time.\s+A policy engine rule triggered a pipeline warning, please view output above for more details" && "$status" -eq 0 && $output != *"upload-all-files"* ]]
+#}
 
-    run docker run \
-        --env-file ./.env.test.local \
-        -v $(pwd):$(pwd) \
-        -w $(pwd) \
-        ${DOCKER_IMAGE}:test
+#@test "Valid account, with vulnerabilities, without Gradle files, pipeline warning" {
+#    echo "BITBUCKET_REPO_SLUG=${BITBUCKET_REPO_SLUG}-pipeline-warning-with-vuln" >> .env.test.local
+#
+#    run docker run \
+#        --env-file ./.env.test.local \
+#        -v $(pwd):$(pwd) \
+#        -w $(pwd) \
+#        ${DOCKER_IMAGE}:test
+#
+#    echo "Status: $status"
+#    echo "Output: $output"
+#
+#    [[ $output =~ "Vulnerabilities detected.\s+A policy engine rule triggered a pipeline warning, please view output above for more details" && "$status" -eq 0 && $output != *"upload-all-files"* ]]
+#}
 
-    echo "Status: $status"
-    echo "Output: $output"
+#@test "Valid account, without vulnerabilities, without Gradle files, pipeline failure" {
+#    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test.local
+#    echo "BITBUCKET_REPO_SLUG=${BITBUCKET_REPO_SLUG}-pipeline-failure-no-vuln" >> .env.test.local
+#
+#    run docker run \
+#        --env-file ./.env.test.local \
+#        -v $(pwd):$(pwd) \
+#        -w $(pwd) \
+#        ${DOCKER_IMAGE}:test
+#
+#    echo "Status: $status"
+#    echo "Output: $output"
+#
+#    [[ $output =~ "No vulnerabilities found at this time.\s+A policy engine rule triggered a pipeline failure, please view output above for more details" && "$status" -eq 0 && $output != *"upload-all-files"* ]]
+#}
 
-    [[ $output =~ "No vulnerabilities found at this time.\s+A policy engine rule triggered a pipeline warning, please view output above for more details" && "$status" -eq 0 && $output != *"upload-all-files"* ]]
-}
-
-@test "Valid account, with vulnerabilities, without Gradle files, pipeline warning" {
-    echo "BITBUCKET_REPO_SLUG=${BITBUCKET_REPO_SLUG}-pipeline-warning-with-vuln" >> .env.test.local
-
-    run docker run \
-        --env-file ./.env.test.local \
-        -v $(pwd):$(pwd) \
-        -w $(pwd) \
-        ${DOCKER_IMAGE}:test
-
-    echo "Status: $status"
-    echo "Output: $output"
-
-    [[ $output =~ "Vulnerabilities detected.\s+A policy engine rule triggered a pipeline warning, please view output above for more details" && "$status" -eq 0 && $output != *"upload-all-files"* ]]
-}
-
-@test "Valid account, without vulnerabilities, without Gradle files, pipeline failure" {
-    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test.local
-    echo "BITBUCKET_REPO_SLUG=${BITBUCKET_REPO_SLUG}-pipeline-failure-no-vuln" >> .env.test.local
-
-    run docker run \
-        --env-file ./.env.test.local \
-        -v $(pwd):$(pwd) \
-        -w $(pwd) \
-        ${DOCKER_IMAGE}:test
-
-    echo "Status: $status"
-    echo "Output: $output"
-
-    [[ $output =~ "No vulnerabilities found at this time.\s+A policy engine rule triggered a pipeline failure, please view output above for more details" && "$status" -eq 0 && $output != *"upload-all-files"* ]]
-}
-
-@test "Valid account, with vulnerabilities, without Gradle files, pipeline failure" {
-    echo "BITBUCKET_REPO_SLUG=${BITBUCKET_REPO_SLUG}-pipeline-failure-with-vuln" >> .env.test.local
-
-    run docker run \
-        --env-file ./.env.test.local \
-        -v $(pwd):$(pwd) \
-        -w $(pwd) \
-        ${DOCKER_IMAGE}:test
-
-    echo "Status: $status"
-    echo "Output: $output"
-
-    [[ $output =~ "Vulnerabilities detected.\s+A policy engine rule triggered a pipeline failure, please view output above for more details" && "$status" -eq 0 && $output != *"upload-all-files"* ]]
-}
+#@test "Valid account, with vulnerabilities, without Gradle files, pipeline failure" {
+#    echo "BITBUCKET_REPO_SLUG=${BITBUCKET_REPO_SLUG}-pipeline-failure-with-vuln" >> .env.test.local
+#
+#    run docker run \
+#        --env-file ./.env.test.local \
+#        -v $(pwd):$(pwd) \
+#        -w $(pwd) \
+#        ${DOCKER_IMAGE}:test
+#
+#    echo "Status: $status"
+#    echo "Output: $output"
+#
+#    [[ $output =~ "Vulnerabilities detected.\s+A policy engine rule triggered a pipeline failure, please view output above for more details" && "$status" -eq 0 && $output != *"upload-all-files"* ]]
+#}
 
 @test "Valid account, skip scan true" {
     echo "SKIP_SCAN=true" >> .env.test.local
