@@ -108,13 +108,37 @@ else
   run /root/.composer/vendor/debricked/cli/bin/console debricked:scan "${SCAN_PARAMETERS[@]}"
 fi
 
+policyEngineFailureRegex='A\s+policy\s+engine\s+rule\s+triggered\s+a\s+pipeline\s+failure\.'
+policyEngineWarningRegex='A\s+policy\s+engine\s+rule\s+triggered\s+a\s+pipeline\s+warning\.'
 vulnerabilitiesOutputRegex='\[ERROR\]\s+Scan completed'
+
+vulnerabilitiesDetectedMsg="\n\nVulnerabilities detected"
+noVulnerabilitiesMsg="No vulnerabilities found at this time."
+
 if [[ "${SKIP_SCAN}" == "true" && "${status}" == "0" ]]; then
   success "Files were successfully uploaded, scan result will be available at https://app.debricked.com in a short while."
-elif [[ "${output}" =~ $vulnerabilitiesOutputRegex && "${status}" == "0" ]]; then
-  neutral "Vulnerabilities detected"
-elif [[  "${status}" == "0" ]]; then
-  success "Success! No vulnerabilities found at this time."
+elif [[ "${output}" =~ $policyEngineFailureRegex && "${status}" == "0" ]]; then
+  failOutput=""
+  if [[ "${output}" =~ $vulnerabilitiesOutputRegex ]]; then
+    failOutput+=$vulnerabilitiesDetectedMsg
+  else
+    failOutput+="\n\n${noVulnerabilitiesMsg}"
+  fi
+  failOutput+="\n\nA policy engine rule triggered a pipeline failure, please view output above for more details"
+  fail "$failOutput"
+elif [[ ("${output}" =~ $vulnerabilitiesOutputRegex || "${output}" =~ $policyEngineWarningRegex) && "${status}" == "0" ]]; then
+  neutralOutput=""
+  if [[ "${output}" =~ $vulnerabilitiesOutputRegex ]]; then
+    neutralOutput+=$vulnerabilitiesDetectedMsg
+  else
+    neutralOutput+="\n\n${noVulnerabilitiesMsg}"
+  fi
+  if [[ "${output}" =~ $policyEngineWarningRegex ]]; then
+    neutralOutput+="\n\nA policy engine rule triggered a pipeline warning, please view output above for more details"
+  fi
+  neutral "$neutralOutput"
+elif [[ "${status}" == "0" ]]; then
+  success "Success! ${noVulnerabilitiesMsg}"
 else
   fail "Unknown error, please view pipe output for more details."
 fi
