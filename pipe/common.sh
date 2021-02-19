@@ -112,7 +112,7 @@ policyEngineFailureRegex='A\s+policy\s+engine\s+rule\s+triggered\s+a\s+pipeline\
 policyEngineWarningRegex='A\s+policy\s+engine\s+rule\s+triggered\s+a\s+pipeline\s+warning\.'
 vulnerabilitiesOutputRegex='\[ERROR\]\s+Scan completed'
 
-vulnerabilitiesDetectedMsg="\n\nVulnerabilities detected"
+vulnerabilitiesDetectedMsg="\n\nVulnerabilities detected."
 noVulnerabilitiesMsg="No vulnerabilities found at this time."
 
 if [[ "${SKIP_SCAN}" == "true" && "${status}" == "0" ]]; then
