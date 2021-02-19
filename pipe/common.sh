@@ -116,7 +116,7 @@ vulnerabilitiesDetectedMsg="\n\nVulnerabilities detected."
 noVulnerabilitiesMsg="No vulnerabilities found at this time."
 
 if [[ "${SKIP_SCAN}" == "true" && "${status}" == "0" ]]; then
-  success "Files were successfully uploaded, scan result will be available at https://app.debricked.com in a short while."
+  success "Files were successfully uploaded, scan result will be available at https://app.debricked.com in a short while. You have the skip_scan variable active. While active any Policies set won't affect this pipeline. Please remove the skip_scan variable if you want to enable your policies."
 elif [[ "${output}" =~ $policyEngineFailureRegex && "${status}" == "0" ]]; then
   failOutput=""
   if [[ "${output}" =~ $vulnerabilitiesOutputRegex ]]; then
