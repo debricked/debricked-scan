@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 1.1.6
+
+- patch: Modernised pipe config
+
 ## 1.1.5
 
 - patch: Adds support for conditional scan - when scan queues are exceptional long the command will return immediately as to not block for a very long time
