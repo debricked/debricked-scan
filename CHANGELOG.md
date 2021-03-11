@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 1.1.7
+
+- patch: Improved parsing of some options
+
 ## 1.1.6
 
 - patch: Modernised pipe config
