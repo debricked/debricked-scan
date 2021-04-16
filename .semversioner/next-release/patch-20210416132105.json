@@ -1,4 +1,0 @@
-{
-  "type": "patch",
-  "description": "Parse repository url smarter, and allow override"
-}
