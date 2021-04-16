@@ -247,3 +247,82 @@ setup() {
 
     [[ $output =~ "Success! No vulnerabilities found at this time" && "$status" -eq 0 && $output != *"upload-all-files"* ]]
 }
+
+@test "CircleCI Github unknown repo url" {
+    random_hash=$(openssl rand -hex 20)
+
+    touch .env.test
+    echo "DEBRICKED_USERNAME=$USERNAME" > .env.test
+    echo "DEBRICKED_PASSWORD=$PASSWORD" >> .env.test
+    echo "CIRCLE_PROJECT_USERNAME=someuser" >> .env.test
+    echo "CIRCLE_PROJECT_REPONAME=somerepo" >> .env.test
+    echo "CIRCLE_REPOSITORY_URL=git@someweirdhost.com:someuser/somerepo.git" >> .env.test
+    echo "CIRCLE_BRANCH=main" >> .env.test
+    echo "CIRCLE_SHA1=$random_hash" >> .env.test
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        --entrypoint /circleci.sh \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ "Your repository URL could not be found" && "$status" -eq 0 ]]
+}
+
+@test "CircleCI Github repourl override" {
+    random_hash=$(openssl rand -hex 20)
+
+    touch .env.test
+    echo "DEBRICKED_USERNAME=$USERNAME" > .env.test
+    echo "DEBRICKED_PASSWORD=$PASSWORD" >> .env.test
+    echo "CIRCLE_PROJECT_USERNAME=someuser" >> .env.test
+    echo "CIRCLE_PROJECT_REPONAME=somerepo" >> .env.test
+    echo "CIRCLE_REPOSITORY_URL=git@github.com:someuser/somerepo.git" >> .env.test
+    echo "CIRCLE_BRANCH=main" >> .env.test
+    echo "CIRCLE_SHA1=$random_hash" >> .env.test
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test
+    echo "DEBRICKED_REPOSITORY_URL=https://some.git.host/location/here" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        --entrypoint /circleci.sh \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ "https://some.git.host/location/here" && "$status" -eq 0 ]]
+}
+
+@test "CircleCI Github SSH repo parsing" {
+    random_hash=$(openssl rand -hex 20)
+
+    touch .env.test
+    echo "DEBRICKED_USERNAME=$USERNAME" > .env.test
+    echo "DEBRICKED_PASSWORD=$PASSWORD" >> .env.test
+    echo "CIRCLE_PROJECT_USERNAME=someuser" >> .env.test
+    echo "CIRCLE_PROJECT_REPONAME=repo-is_her3" >> .env.test
+    echo "CIRCLE_REPOSITORY_URL=git@github.com:someuser/repo-is_her3.git" >> .env.test
+    echo "CIRCLE_BRANCH=main" >> .env.test
+    echo "CIRCLE_SHA1=$random_hash" >> .env.test
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        --entrypoint /circleci.sh \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ "https://github.com/someuser/repo-is_her3" && "$status" -eq 0 ]]
+}
