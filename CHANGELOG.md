@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 1.2.2
+
+- patch: Add support for sending commit author.
+
 ## 1.2.1
 
 - patch: Parse repository url smarter, and allow override

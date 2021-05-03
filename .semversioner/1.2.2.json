@@ -1,0 +1,6 @@
+[
+  {
+    "description": "Add support for sending commit author.",
+    "type": "patch"
+  }
+]
