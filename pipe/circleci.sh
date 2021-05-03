@@ -7,6 +7,10 @@ COMMIT="${CIRCLE_SHA1}"
 BRANCH="${CIRCLE_BRANCH}"
 BASE_DIRECTORY=${BASE_DIRECTORY:=""}
 INTEGRATION_NAME=circleci
+if command -v git &> /dev/null
+then
+  AUTHOR=$(git log -1 --pretty=%ae)
+fi
 
 # the repository url is determined according to the following rules:
 # 1. If DEBRICKED_REPOSITORY_URL is set, always use it as the repo url.

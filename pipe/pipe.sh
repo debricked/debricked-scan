@@ -8,4 +8,8 @@ COMMIT=${BITBUCKET_COMMIT}
 BRANCH=${BITBUCKET_BRANCH}
 REPOSITORY_URL=${BITBUCKET_GIT_HTTP_ORIGIN}
 INTEGRATION_NAME=bitbucket
+if command -v git &> /dev/null
+then
+  AUTHOR=$(git log -1 --pretty=%ae)
+fi
 source "$(dirname "$0")/common.sh"

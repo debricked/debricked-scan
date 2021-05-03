@@ -15,4 +15,8 @@ BASE_DIRECTORY=${BASE_DIRECTORY:=""}
 REPOSITORY_URL="https://github.com/${GITHUB_REPOSITORY}"
 INTEGRATION_NAME=github
 SKIP_SCAN=${SKIP_SCAN}
+if command -v git &> /dev/null
+then
+  AUTHOR=$(git log -1 --pretty=%ae)
+fi
 source "$(dirname "$0")/common.sh"

@@ -88,6 +88,10 @@ if [ ! -z "$BRANCH" ]; then
     SCAN_PARAMETERS+=(--branch-name="${BRANCH}")
 fi
 
+if [ ! -z "$AUTHOR" ]; then
+    SCAN_PARAMETERS+=(--author="${AUTHOR}")
+fi
+
 if [ ${EXCLUDED_DIRECTORIES+x} ]; then
     SCAN_PARAMETERS+=(--excluded-directories="${EXCLUDED_DIRECTORIES}")
 fi
