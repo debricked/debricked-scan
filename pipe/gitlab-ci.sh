@@ -11,7 +11,12 @@ if [[ ! -f /ci_runned ]] ; then
     REPOSITORY_URL=${CI_PROJECT_URL}
     INTEGRATION_NAME=gitlab
     SKIP_SCAN=${SKIP_SCAN}
-    AUTHOR=${CI_COMMIT_AUTHOR}
+    if [ -n "${CI_COMMIT_AUTHOR}" ]; then
+      AUTHOR="${CI_COMMIT_AUTHOR}"
+    elif command -v git &> /dev/null
+    then
+      AUTHOR=$(git log -1 --pretty=%ae)
+    fi
 
     [[ $CI ]] && touch /ci_runned
     source "$(dirname "$0")/common.sh"

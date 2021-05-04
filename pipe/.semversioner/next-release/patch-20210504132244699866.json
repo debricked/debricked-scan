@@ -1,0 +1,4 @@
+{
+  "type": "patch",
+  "description": "Fallback to git log if author is not available from gitlab"
+}
