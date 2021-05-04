@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 1.2.3
+
+- patch: Fallback to git log if author is not available from GitLab
+
 ## 1.2.2
 
 - patch: Add support for sending commit author.
