@@ -49,7 +49,7 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ $output =~ "Vulnerabilities detected." && "$status" -eq 0 && $output =~ "upload-all-files" ]]
+    [[ $output =~ "VULNERABILITIES FOUND" && "$status" -eq 0 && $output =~ "upload-all-files" ]]
 }
 
 @test "Valid account, with vulnerabilities, enabled upload-all-files option" {
@@ -64,7 +64,7 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ $output =~ "Vulnerabilities detected." && "$status" -eq 0 && ! $output =~ "\supload-all-files\s+option" ]]
+    [[ $output =~ "VULNERABILITIES FOUND" && "$status" -eq 0 && ! $output =~ "\supload-all-files\s+option" ]]
 }
 
 @test "Valid account, without vulnerabilities, without Gradle files" {
@@ -110,7 +110,7 @@ setup() {
 #    echo "Status: $status"
 #    echo "Output: $output"
 #
-#    [[ $output =~ "Vulnerabilities detected.\s+A policy engine rule triggered a pipeline warning, please view output above for more details" && "$status" -eq 0 && $output != *"upload-all-files"* ]]
+#    [[ $output =~ "VULNERABILITIES FOUND\s+A policy engine rule triggered a pipeline warning, please view output above for more details" && "$status" -eq 0 && $output != *"upload-all-files"* ]]
 #}
 
 #@test "Valid account, without vulnerabilities, without Gradle files, pipeline failure" {
@@ -141,7 +141,7 @@ setup() {
 #    echo "Status: $status"
 #    echo "Output: $output"
 #
-#    [[ $output =~ "Vulnerabilities detected.\s+A policy engine rule triggered a pipeline failure, please view output above for more details" && "$status" -eq 0 && $output != *"upload-all-files"* ]]
+#    [[ $output =~ "VULNERABILITIES FOUND\s+A policy engine rule triggered a pipeline failure, please view output above for more details" && "$status" -eq 0 && $output != *"upload-all-files"* ]]
 #}
 
 @test "Valid account, skip scan true" {
@@ -187,7 +187,7 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ $output =~ "Vulnerabilities detected." && "$status" -eq 0 ]]
+    [[ $output =~ "VULNERABILITIES FOUND" && "$status" -eq 0 ]]
 }
 
 @test "Valid account, with branch, without vulnerabilities" {
