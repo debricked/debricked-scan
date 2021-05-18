@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 1.2.4
+
+- patch: Upgrade debricked-cli to 6.0.3
+
 ## 1.2.3
 
 - patch: Fallback to git log if author is not available from GitLab

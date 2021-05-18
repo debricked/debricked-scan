@@ -1,0 +1,6 @@
+[
+  {
+    "description": "Upgrade debricked-cli to 6.0.3",
+    "type": "patch"
+  }
+]
