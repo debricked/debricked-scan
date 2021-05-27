@@ -121,7 +121,7 @@ noVulnerabilitiesMsg="No vulnerabilities found at this time."
 
 if [[ "${SKIP_SCAN}" == "true" && "${status}" == "0" ]]; then
   success "Files were successfully uploaded, scan result will be available at https://app.debricked.com in a short while. You have the skip_scan variable active. While active any Policies set won't affect this pipeline. Please remove the skip_scan variable if you want to enable your policies."
-elif [[ "${output}" =~ $policyEngineFailureRegex && "${status}" == "0" ]]; then
+elif [[ "${output}" =~ $policyEngineFailureRegex && "${status}" == @(0|2) ]]; then
   failOutput=""
   if [[ "${output}" =~ $vulnerabilitiesOutputRegex ]]; then
     failOutput+=$vulnerabilitiesDetectedMsg
@@ -130,7 +130,7 @@ elif [[ "${output}" =~ $policyEngineFailureRegex && "${status}" == "0" ]]; then
   fi
   failOutput+="\n\nA policy engine rule triggered a pipeline failure, please view output above for more details"
   fail "$failOutput"
-elif [[ ("${output}" =~ $vulnerabilitiesOutputRegex || "${output}" =~ $policyEngineWarningRegex) && "${status}" == "0" ]]; then
+elif [[ ("${output}" =~ $vulnerabilitiesOutputRegex || "${output}" =~ $policyEngineWarningRegex) && "${status}" == @(0|2) ]]; then
   neutralOutput=""
   if [[ "${output}" =~ $vulnerabilitiesOutputRegex ]]; then
     neutralOutput+=$vulnerabilitiesDetectedMsg
@@ -141,7 +141,7 @@ elif [[ ("${output}" =~ $vulnerabilitiesOutputRegex || "${output}" =~ $policyEng
     neutralOutput+="\n\nA policy engine rule triggered a pipeline warning, please view output above for more details"
   fi
   neutral "$neutralOutput"
-elif [[ "${status}" == "0" ]]; then
+elif [[ "${status}" == @(0|2) ]]; then
   success "Success! ${noVulnerabilitiesMsg}"
 else
   fail "Unknown error, please view pipe output for more details."
