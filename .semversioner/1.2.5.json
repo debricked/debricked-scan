@@ -1,0 +1,6 @@
+[
+  {
+    "description": "Add support for latest debricked-cli",
+    "type": "patch"
+  }
+]

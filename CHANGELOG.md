@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 1.2.5
+
+- patch: Add support for latest debricked-cli
+
 ## 1.2.4
 
 - patch: Upgrade debricked-cli to 6.0.3
