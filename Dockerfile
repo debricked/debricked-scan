@@ -1,6 +1,6 @@
 FROM php:7.4-cli-alpine
 
-RUN apk update && apk add bash libzip-dev
+RUN apk update && apk add bash git libzip-dev
 
 RUN docker-php-ext-install zip opcache
 
@@ -16,10 +16,13 @@ RUN echo "opcache.enable = 1" >> /usr/local/etc/php/php.ini \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer \
     && chmod +x /usr/bin/composer
 
-RUN composer global config minimum-stability beta && composer global require debricked/cli ^7.0.0 --prefer-stable
+RUN composer global config minimum-stability beta && composer global require debricked/cli ^7.2.0 --prefer-stable
 
 COPY pipe /
 COPY test /test
 RUN chmod a+x /*.sh
+
+# Run debricked-cli once during build to fetch all dependencies
+RUN ["/root/.composer/vendor/debricked/cli/bin/console", "debricked:scan", "--help"]
 
 ENTRYPOINT ["/pipe.sh"]
