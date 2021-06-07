@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 1.3.0
+
+- minor: Add support for access tokens and show Automations output, if any
+
 ## 1.2.5
 
 - patch: Add support for latest debricked-cli

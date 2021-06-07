@@ -1,0 +1,6 @@
+[
+  {
+    "description": "Add support for access tokens and show Automations output, if any",
+    "type": "minor"
+  }
+]
