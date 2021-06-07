@@ -29,6 +29,7 @@ You should mask your username and password in order to avoid revealing your logi
 | ------------------------ | ----------------------------------------------------------- |
 | USERNAME (*)             | Your Debricked username. Don't have an account? No worries! Get your free 30-day trial at [https://app.debricked.com/en/register](https://app.debricked.com/en/register?utm_source=bitbucket_pipe) |
 | PASSWORD (*)             | Your Debricked password |
+| DEBRICKED_TOKEN (*)      | Your Debricked access token, which can be used instead of username+password. See [https://debricked.com/documentation/](https://debricked.com/documentation/) for instructions. |
 | BASE_DIRECTORY           | Base directory to scan through. Default: Empty string (repository root). |
 | RECURSIVE_FILE_SEARCH    | Recursively search through base directory. Default: `true`. |
 | EXCLUDED_DIRECTORIES     | A comma separated list of directories to exclude. Default: A list of some common package managers' default modules/vendors directories. |
@@ -38,7 +39,7 @@ You should mask your username and password in order to avoid revealing your logi
 | DISABLE_SNIPPET_SCAN     | If set to "true", snippet analysis will be disabled and no anonymised functions will be sent to Debricked. License detection will be limited if this option is enabled. Default: `false`. |
 | DEBRICKED_REPOSITORY_URL | For CircleCI: manually set the http/https URL to the repository. Default: tries to autodetect, but may not work for all source-code managers. |
 
-_(*) = required variable._
+_(*) = you need to supply either username+password or an access token._
 
 ## Prerequisites
 

@@ -63,8 +63,14 @@ run() {
 info "Executing the pipe..."
 
 # Required parameters
-USERNAME=${USERNAME:?'USERNAME variable missing.'}
-PASSWORD=${PASSWORD:?'PASSWORD variable missing.'}
+# If access token is given, it is always used instead of username/password
+if [ ! -z "$DEBRICKED_TOKEN" ]; then
+  CLI_USERNAME=''
+  CLI_PASSWORD="${DEBRICKED_TOKEN}"
+else
+  CLI_USERNAME=${USERNAME:?'USERNAME variable missing.'}
+  CLI_PASSWORD=${PASSWORD:?'PASSWORD variable missing.'}
+fi
 
 # Default parameters
 BASE_DIRECTORY=${BASE_DIRECTORY:=""}
@@ -75,8 +81,8 @@ UPLOAD_ALL_FILES=${UPLOAD_ALL_FILES:="false"}
 SKIP_SCAN=${SKIP_SCAN:="false"}
 
 SCAN_PARAMETERS=()
-SCAN_PARAMETERS+=("${USERNAME}")
-SCAN_PARAMETERS+=("${PASSWORD}")
+SCAN_PARAMETERS+=("${CLI_USERNAME}")
+SCAN_PARAMETERS+=("${CLI_PASSWORD}")
 SCAN_PARAMETERS+=("${REPOSITORY}")
 SCAN_PARAMETERS+=("${COMMIT}")
 SCAN_PARAMETERS+=("${REPOSITORY_URL}")

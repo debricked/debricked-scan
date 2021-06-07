@@ -326,3 +326,66 @@ setup() {
 
     [[ $output =~ "https://github.com/someuser/repo-is_her3" && "$status" -eq 0 ]]
 }
+
+@test "Access token instead of username and password" {
+    echo "DEBRICKED_TOKEN=$DEBRICKED_TOKEN" > .env.test
+    echo "BITBUCKET_REPO_OWNER=$BITBUCKET_REPO_OWNER" >> .env.test
+    echo "BITBUCKET_REPO_SLUG=$BITBUCKET_REPO_SLUG" >> .env.test
+    echo "BITBUCKET_GIT_HTTP_ORIGIN=$BITBUCKET_GIT_HTTP_ORIGIN" >> .env.test
+    echo "BITBUCKET_COMMIT=$random_hash" >> .env.test
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ "Success! No vulnerabilities found at this time" && "$status" -eq 0 && $output != *"upload-all-files"* ]]
+}
+
+@test "Access token is used if token and username and password are given all at once" {
+    echo "DEBRICKED_TOKEN=$DEBRICKED_TOKEN" > .env.test
+    echo "USERNAME=some-really-invalid-user@example.com" >> .env.test
+    echo "PASSWORD=just-wrong" >> .env.test
+    echo "BITBUCKET_REPO_OWNER=$BITBUCKET_REPO_OWNER" >> .env.test
+    echo "BITBUCKET_REPO_SLUG=$BITBUCKET_REPO_SLUG" >> .env.test
+    echo "BITBUCKET_GIT_HTTP_ORIGIN=$BITBUCKET_GIT_HTTP_ORIGIN" >> .env.test
+    echo "BITBUCKET_COMMIT=$random_hash" >> .env.test
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ "Success! No vulnerabilities found at this time" && "$status" -eq 0 && $output != *"upload-all-files"* ]]
+}
+
+
+@test "Invalid access token" {
+    echo "DEBRICKED_TOKEN=abcdef1234567890" > .env.test
+    echo "BITBUCKET_REPO_OWNER=$BITBUCKET_REPO_OWNER" >> .env.test
+    echo "BITBUCKET_REPO_SLUG=$BITBUCKET_REPO_SLUG" >> .env.test
+    echo "BITBUCKET_GIT_HTTP_ORIGIN=$BITBUCKET_GIT_HTTP_ORIGIN" >> .env.test
+    echo "BITBUCKET_COMMIT=$random_hash" >> .env.test
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ "$status" -eq 1 && $output =~ "An authentication exception occurred" ]]
+}
