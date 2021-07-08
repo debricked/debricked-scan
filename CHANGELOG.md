@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 1.3.1
+
+- patch: Update debricked-cli to 7.2.1 in order to pick up hidden files
+
 ## 1.3.0
 
 - minor: Add support for access tokens and show Automations output, if any
