@@ -1,6 +1,0 @@
-[
-  {
-    "description": "Update debricked-cli to 7.2.1 in order to pick up hidden files",
-    "type": "patch"
-  }
-]
