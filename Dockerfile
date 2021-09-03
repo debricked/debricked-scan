@@ -1,4 +1,4 @@
-FROM php:7.4-cli-alpine
+FROM php:8.0-cli-alpine
 
 RUN apk update && apk add bash git libzip-dev
 
@@ -16,7 +16,7 @@ RUN echo "opcache.enable = 1" >> /usr/local/etc/php/php.ini \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer \
     && chmod +x /usr/bin/composer
 
-RUN composer global config minimum-stability beta && composer global require debricked/cli ^7.2.1 --prefer-stable
+RUN composer global config minimum-stability beta && composer global require debricked/cli ^8.0.0 --prefer-stable
 
 COPY pipe /
 COPY test /test
