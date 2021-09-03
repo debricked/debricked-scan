@@ -8,7 +8,7 @@ Add the following snippet to the script section of your `bitbucket-pipelines.yml
 
 ```yaml
 script:
-  - pipe: debricked/debricked-scan:1.3.1
+  - pipe: debricked/debricked-scan:1.4.0
     variables:
       USERNAME: "<string>"
       PASSWORD: "<string>"
@@ -49,7 +49,7 @@ Basic example:
 
 ```yaml
 script:
-  - pipe: debricked/debricked-scan:1.3.1
+  - pipe: debricked/debricked-scan:1.4.0
     variables:
       USERNAME: "foo"
       PASSWORD: "bar"
@@ -59,7 +59,7 @@ Advanced example:
 
 ```yaml
 script:
-  - pipe: debricked/debricked-scan:1.3.1
+  - pipe: debricked/debricked-scan:1.4.0
     variables:
       USERNAME: "foo"
       PASSWORD: "bar"

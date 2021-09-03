@@ -1,0 +1,6 @@
+[
+  {
+    "description": "Add support for Automations Webhook.",
+    "type": "minor"
+  }
+]
