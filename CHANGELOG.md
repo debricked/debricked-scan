@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 1.4.2
+
+- patch: Make scans more resilient by updating to latest version of debricked-cli.
+
 ## 1.4.1
 
 - patch: Update to latest version of debricked-cli.

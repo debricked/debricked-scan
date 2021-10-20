@@ -1,4 +1,0 @@
-{
-  "type": "patch",
-  "description": "Make scans more resilient by updating to latest version of debricked-cli."
-}
