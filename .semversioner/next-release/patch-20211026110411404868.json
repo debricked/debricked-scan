@@ -1,4 +1,0 @@
-{
-  "type": "patch",
-  "description": "Refactor script to use the new Automations name rather than policy engine"
-}
