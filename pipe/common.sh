@@ -110,6 +110,10 @@ if [[ "${DISABLE_SNIPPET_SCAN}" == "true" ]]; then
     SCAN_PARAMETERS+=(--disable-snippets)
 fi
 
+if [[ ! -z "$DEFAULT_BRANCH" ]]; then
+  SCAN_PARAMETERS+=(--default-branch="${DEFAULT_BRANCH}")
+fi
+
 SCAN_PARAMETERS+=(-v)
 
 if [[ "${SKIP_SCAN}" == "true" ]]; then
