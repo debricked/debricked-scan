@@ -177,7 +177,7 @@ setup() {
 
 @test "Valid account, with branch, with vulnerabilities" {
     echo "BITBUCKET_BRANCH=$BITBUCKET_BRANCH" >> .env.test.local
-    
+
     run docker run \
         --env-file ./.env.test.local \
         -v $(pwd):$(pwd) \
@@ -229,9 +229,9 @@ setup() {
     echo "PASSWORD=$PASSWORD" >> .env.test
     echo "BITBUCKET_REPO_OWNER=$BITBUCKET_REPO_OWNER" >> .env.test
 
-    # make a repo with space in name here. 
+    # make a repo with space in name here.
     echo 'BITBUCKET_REPO_SLUG="space repo"' >> .env.test
-    
+
     echo "BITBUCKET_GIT_HTTP_ORIGIN=$BITBUCKET_GIT_HTTP_ORIGIN" >> .env.test
     echo "BITBUCKET_COMMIT=$random_hash" >> .env.test
     echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test
@@ -388,4 +388,29 @@ setup() {
     echo "Output: $output"
 
     [[ "$status" -eq 1 && $output =~ "An authentication exception occurred" ]]
+}
+
+@test "Gitlab has no default branch" {
+    random_hash=$(openssl rand -hex 20)
+
+    touch .env.test
+    echo "DEBRICKED_USERNAME=$USERNAME" > .env.test
+    echo "DEBRICKED_PASSWORD=$PASSWORD" >> .env.test
+    echo "CI_PROJECT_PATH=someuser/repo-is_her3" >> .env.test
+    echo "CI_PROJECT_URL=git@gitlab.com:someuser/repo-is_her3.git" >> .env.test
+    echo "CI_COMMIT_REF_NAME=main" >> .env.test
+    echo "CI_COMMIT_SHA=$random_hash" >> .env.test
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        --entrypoint /circleci.sh \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ "You are probably using a version of gitlab before 12.4. This means we can not know what your default branch is. This might impact your experience using Debricked's tools" && "$status" -eq 0 ]]
 }

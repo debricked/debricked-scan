@@ -7,6 +7,11 @@ if [[ ! -f /ci_runned ]] ; then
     REPOSITORY="${CI_PROJECT_PATH}"
     COMMIT="${CI_COMMIT_SHA}"
     BRANCH="${CI_COMMIT_REF_NAME}"
+    if [ ! -z "${CI_DEFAULT_BRANCH}" ]; then
+      DEFAULT_BRANCH="${CI_DEFAULT_BRANCH}"
+    else
+      echo -e "You are probably using a version of gitlab before 12.4. This means we can not know what your default branch is. This might impact your experience using Debricked's tools"
+    fi
     BASE_DIRECTORY=${BASE_DIRECTORY:=$CI_PROJECT_DIR}
     REPOSITORY_URL=${CI_PROJECT_URL}
     INTEGRATION_NAME=gitlab
