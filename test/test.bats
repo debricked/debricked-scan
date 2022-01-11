@@ -394,8 +394,8 @@ setup() {
     random_hash=$(openssl rand -hex 20)
 
     touch .env.test
-    echo "DEBRICKED_USERNAME=$USERNAME" > .env.test
-    echo "DEBRICKED_PASSWORD=$PASSWORD" >> .env.test
+    echo "USERNAME=$USERNAME" > .env.test
+    echo "PASSWORD=$PASSWORD" >> .env.test
     echo "CI_PROJECT_PATH=someuser/repo-is_her3" >> .env.test
     echo "CI_PROJECT_URL=git@gitlab.com:someuser/repo-is_her3.git" >> .env.test
     echo "CI_COMMIT_REF_NAME=main" >> .env.test
@@ -406,7 +406,7 @@ setup() {
         --env-file ./.env.test \
         -v $(pwd):$(pwd) \
         -w $(pwd) \
-        --entrypoint /circleci.sh \
+        --entrypoint /gitlab-ci.sh \
         ${DOCKER_IMAGE}:test
 
     echo "Status: $status"
