@@ -414,3 +414,29 @@ setup() {
 
     [[ $output =~ "You are probably using a version of gitlab before 12.4. This means we can not know what your default branch is. This might impact your experience using Debricked's tools" && "$status" -eq 0 ]]
 }
+
+@test "Gitlab has default branch" {
+    random_hash=$(openssl rand -hex 20)
+
+    touch .env.test
+    echo "USERNAME=$USERNAME" > .env.test
+    echo "PASSWORD=$PASSWORD" >> .env.test
+    echo "CI_PROJECT_PATH=someuser/repo-is_her3" >> .env.test
+    echo "CI_PROJECT_URL=git@gitlab.com:someuser/repo-is_her3.git" >> .env.test
+    echo "CI_COMMIT_REF_NAME=main" >> .env.test
+    echo "CI_COMMIT_SHA=$random_hash" >> .env.test
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test
+    echo "CI_DEFAULT_BRANCH=dev" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        --entrypoint /gitlab-ci.sh \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ "Success! No vulnerabilities found at this time" && "$status" -eq 0 ]]
+}
