@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 1.4.4
+
+- patch: Add support for getting configured default branch in GitLab
+
 ## 1.4.3
 
 - patch: Refactor script to use the new Automations name rather than policy engine
