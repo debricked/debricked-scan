@@ -1,0 +1,10 @@
+[
+  {
+    "description": "Recommend source code less scans instead of uploading all files.",
+    "type": "patch"
+  },
+  {
+    "description": "Update to latest version of debricked-cli.",
+    "type": "patch"
+  }
+]

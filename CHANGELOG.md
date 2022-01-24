@@ -1,6 +1,11 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 1.4.6
+
+- patch: Recommend source code less scans instead of uploading all files.
+- patch: Update to latest version of debricked-cli.
+
 ## 1.4.5
 
 - patch: Update to latest version of debricked-cli.
