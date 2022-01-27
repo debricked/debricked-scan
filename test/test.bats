@@ -156,7 +156,7 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ $output =~ "Files were successfully uploaded, scan result will be available at" && "SKIP_SCAN = $SKIP_SCAN"  && "$status" -eq 0 ]]
+    [[ $output =~ "Files were successfully uploaded, scan result will be available at" && $output != *"VULNERABILITIES FOUND"* && "SKIP_SCAN = $SKIP_SCAN"  && "$status" -eq 0 ]]
 }
 
 @test "Valid account, skip scan false" {
@@ -439,4 +439,67 @@ setup() {
     echo "Output: $output"
 
     [[ $output =~ "Success! No vulnerabilities found at this time" && "$status" -eq 0 ]]
+}
+
+@test "Disable conditional skip scan false and skip scan false" {
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test.local
+    run docker run \
+        --env-file ./.env.test.local \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output != *"Files were successfully uploaded, scan result will be available at"* && $output =~ "Success! No vulnerabilities found at this time" && "$status" -eq 0 ]]
+}
+
+@test "Disable conditional skip scan false and skip scan true" {
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test.local
+    echo "SKIP_SCAN=true" >> .env.test.local
+
+    run docker run \
+        --env-file ./.env.test.local \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ "Files were successfully uploaded, scan result will be available at" && $output != *"Success! No vulnerabilities found at this time"* && "$status" -eq 0 ]]
+}
+
+@test "Disable conditional skip scan true and skip scan false" {
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test.local
+    echo "DISABLE_CONDITIONAL_SKIP_SCAN=true" >> .env.test.local
+
+    run docker run \
+        --env-file ./.env.test.local \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output != *"Files were successfully uploaded, scan result will be available at"* && $output =~ "Success! No vulnerabilities found at this time" && "$status" -eq 0 ]]
+}
+
+@test "Disable conditional skip scan true and skip scan true" {
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test.local
+    echo "SKIP_SCAN=true" >> .env.test.local
+    echo "DISABLE_CONDITIONAL_SKIP_SCAN=true" >> .env.test.local
+
+    run docker run \
+        --env-file ./.env.test.local \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output != *"Files were successfully uploaded, scan result will be available at"* && $output =~ "Success! No vulnerabilities found at this time" && "$status" -eq 0 ]]
 }
