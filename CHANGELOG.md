@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 1.5.0
+
+- minor: Add support for disabling conditional skip scan.
+
 ## 1.4.6
 
 - patch: Recommend source code less scans instead of uploading all files.
