@@ -79,6 +79,7 @@ DEBUG=${DEBUG:="false"}
 REPOSITORY_URL=${REPOSITORY_URL:=""}
 UPLOAD_ALL_FILES=${UPLOAD_ALL_FILES:="false"}
 SKIP_SCAN=${SKIP_SCAN:="false"}
+DISABLE_CONDITIONAL_SKIP_SCAN=${DISABLE_CONDITIONAL_SKIP_SCAN:="false"}
 
 SCAN_PARAMETERS=()
 SCAN_PARAMETERS+=("${CLI_USERNAME}")
@@ -114,11 +115,15 @@ if [[ ! -z "$DEFAULT_BRANCH" ]]; then
   SCAN_PARAMETERS+=(--default-branch="${DEFAULT_BRANCH}")
 fi
 
+if [[ "${DISABLE_CONDITIONAL_SKIP_SCAN}" == "true" ]]; then
+    SCAN_PARAMETERS+=(--disable-conditional-skip-scan)
+fi
+
 SCAN_PARAMETERS+=(-v)
 
-if [[ "${SKIP_SCAN}" == "true" ]]; then
+if [[ "${DISABLE_CONDITIONAL_SKIP_SCAN}" == "false" && "${SKIP_SCAN}" == "true" ]]; then
   run /root/.composer/vendor/debricked/cli/bin/console debricked:find-and-upload-files "${SCAN_PARAMETERS[@]}"
-else
+else ## DISABLE_CONDITIONAL_SKIP_SCAN overrides SKIP_SCAN if DISABLE_CONDITIONAL_SKIP_SCAN is true
   run /root/.composer/vendor/debricked/cli/bin/console debricked:scan "${SCAN_PARAMETERS[@]}"
 fi
 
@@ -129,7 +134,7 @@ vulnerabilitiesOutputRegex='\[VULNERABILITIES FOUND\]\s+Scan completed'
 vulnerabilitiesDetectedMsg="\n\nVulnerabilities detected."
 noVulnerabilitiesMsg="No vulnerabilities found at this time."
 
-if [[ "${SKIP_SCAN}" == "true" && "${status}" == "0" ]]; then
+if [[ "${DISABLE_CONDITIONAL_SKIP_SCAN}" == "false" && "${SKIP_SCAN}" == "true" && "${status}" == "0" ]]; then
   success "Files were successfully uploaded, scan result will be available at https://app.debricked.com in a short while. You have the skip_scan variable active. While active, any Automation rules set won't affect this pipeline. Please remove the skip_scan variable if you want to enable your rules."
 elif [[ "${output}" =~ $automationFailureRegex && "${status}" == @(0|2) ]]; then
   failOutput=""
