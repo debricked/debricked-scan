@@ -19,6 +19,7 @@ script:
       # SKIP_SCAN: "<boolean>" # Optional
       # UPLOAD_ALL_FILES: "<boolean>" # Optional
       # DISABLE_SNIPPET_SCAN: "<boolean>" # Optional
+      # DISABLE_CONDITIONAL_SKIP_SCAN: "<boolean>" # Optional
 ```
 
 You should mask your username and password in order to avoid revealing your login credentials in the pipeline, please refer to [our Bitbucket documentation](https://debricked.com/documentation/1.0/integrations/ci-build-systems/bitbucket).
@@ -38,6 +39,7 @@ You should mask your username and password in order to avoid revealing your logi
 | UPLOAD_ALL_FILES         | If set to "true", all files will be uploaded, not just your dependency files. Needed for some dependency formats. Default: `false`. |
 | DISABLE_SNIPPET_SCAN     | If set to "true", snippet analysis will be disabled and no anonymised functions will be sent to Debricked. License detection will be limited if this option is enabled. Default: `false`. |
 | DEBRICKED_REPOSITORY_URL | For CircleCI: manually set the http/https URL to the repository. Default: tries to autodetect, but may not work for all source-code managers. |
+| DISABLE_CONDITIONAL_SKIP_SCAN | If set to "true", skip scan will never be triggered. This option overrides the SKIP_SCAN option. Default: `false`. |
 
 _(*) = you need to supply either username+password or an access token._
 
