@@ -107,8 +107,8 @@ if [[ "${UPLOAD_ALL_FILES}" == "true" ]]; then
     SCAN_PARAMETERS+=(--upload-all-files="${UPLOAD_ALL_FILES}")
 fi
 
-if [[ "${DISABLE_SNIPPET_SCAN}" == "true" ]]; then
-    SCAN_PARAMETERS+=(--disable-snippets)
+if [[ "${SNIPPET_ANALYSIS}" == "true" ]]; then
+    SCAN_PARAMETERS+=(--snippet-analysis)
 fi
 
 if [[ ! -z "$DEFAULT_BRANCH" ]]; then
