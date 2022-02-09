@@ -1,0 +1,4 @@
+{
+  "type": "major",
+  "description": "Upgrade Debricked-cli to version 10. Snippet analysis is now disabled by default, it can be enabled by setting SNIPPET_ANALYSIS to true"
+}
