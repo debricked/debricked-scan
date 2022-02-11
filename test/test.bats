@@ -49,7 +49,7 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ $output =~ "VULNERABILITIES FOUND" && "$status" -eq 0 && $output =~ "upload-all-files" ]]
+    [[ $output =~ "VULNERABILITIES FOUND" && "$status" -eq 0 ]]
 }
 
 @test "Valid account, with vulnerabilities, enabled upload-all-files option" {
@@ -110,7 +110,7 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ $output =~ "VULNERABILITIES FOUND" && $output =~ "Vulnerabilities detected." && $output =~ "An automation rule triggered a pipeline warning, please view output above for more details" && "$status" -eq 0 && $output =~ "[WARNING] Skipping" ]]
+    [[ $output =~ "VULNERABILITIES FOUND" && $output =~ "Vulnerabilities detected." && $output =~ "An automation rule triggered a pipeline warning, please view output above for more details" && "$status" -eq 0 ]]
 }
 
 @test "Valid account, without vulnerabilities, without Gradle files, pipeline failure" {
@@ -206,8 +206,8 @@ setup() {
     [[ $output =~ "Success! No vulnerabilities found at this time" && "$status" -eq 0 ]]
 }
 
-@test "Disable snippet scan does indeed disable snippet scan" {
-    echo "DISABLE_SNIPPET_SCAN=true" >> .env.test.local
+@test "Enable snippet analysis does indeed enable snippet analysis" {
+    echo "SNIPPET_ANALYSIS=true" >> .env.test.local
 
     run docker run \
         --env-file ./.env.test.local \
@@ -218,7 +218,7 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ $output =~ "--disable-snippets" && "$status" -eq 0 ]]
+    [[ $output =~ "--snippet-analysis" && "$status" -eq 0 ]]
 }
 
 @test "Can handle repos with space in name" {
