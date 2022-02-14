@@ -15,6 +15,7 @@ setup() {
   echo "BITBUCKET_REPO_SLUG=$BITBUCKET_REPO_SLUG" >> .env.test.local
   echo "BITBUCKET_GIT_HTTP_ORIGIN=$BITBUCKET_GIT_HTTP_ORIGIN" >> .env.test.local
   echo "BITBUCKET_COMMIT=$random_hash" >> .env.test.local
+  echo "DISABLE_CONDITIONAL_SKIP_SCAN=true" >> .env.test.local
 }
 
 @test "Invalid account" {
@@ -145,6 +146,7 @@ setup() {
 }
 
 @test "Valid account, skip scan true" {
+    echo "DISABLE_CONDITIONAL_SKIP_SCAN=false" >> .env.test.local
     echo "SKIP_SCAN=true" >> .env.test.local
 
     run docker run \
@@ -458,6 +460,7 @@ setup() {
 @test "Disable conditional skip scan false and skip scan true" {
     echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test.local
     echo "SKIP_SCAN=true" >> .env.test.local
+    echo "DISABLE_CONDITIONAL_SKIP_SCAN=false" >> .env.test.local
 
     run docker run \
         --env-file ./.env.test.local \
@@ -490,7 +493,6 @@ setup() {
 @test "Disable conditional skip scan true and skip scan true" {
     echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test.local
     echo "SKIP_SCAN=true" >> .env.test.local
-    echo "DISABLE_CONDITIONAL_SKIP_SCAN=true" >> .env.test.local
 
     run docker run \
         --env-file ./.env.test.local \
