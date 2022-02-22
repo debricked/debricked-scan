@@ -505,3 +505,100 @@ setup() {
 
     [[ $output != *"Files were successfully uploaded, scan result will be available at"* && $output =~ "Success! No vulnerabilities found at this time" && "$status" -eq 0 ]]
 }
+
+@test "BuildKite Github unknown repo url" {
+    random_hash=$(openssl rand -hex 20)
+
+    touch .env.test
+    echo "DEBRICKED_USERNAME=$USERNAME" > .env.test
+    echo "DEBRICKED_PASSWORD=$PASSWORD" >> .env.test
+    echo "BUILDKITE_REPO=test-repo-name" >> .env.test
+    echo "BUILDKITE_BRANCH=main" >> .env.test
+    echo "BUILDKITE_COMMIT=$random_hash" >> .env.test
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        --entrypoint /buildkite.sh \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ " test-repo-name " && $output =~ "Your repository URL could not be found" && "$status" -eq 0 ]]
+}
+
+@test "BuildKite Github repourl override" {
+    random_hash=$(openssl rand -hex 20)
+
+    touch .env.test
+    echo "DEBRICKED_USERNAME=$USERNAME" > .env.test
+    echo "DEBRICKED_PASSWORD=$PASSWORD" >> .env.test
+    echo "BUILDKITE_REPO=test-repo-name" >> .env.test
+    echo "BUILDKITE_BRANCH=main" >> .env.test
+    echo "BUILDKITE_COMMIT=$random_hash" >> .env.test
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test
+    echo "DEBRICKED_REPOSITORY_URL=https://some.git.host/location/here" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        --entrypoint /buildkite.sh \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ " test-repo-name " && $output =~ "https://some.git.host/location/here" && "$status" -eq 0 ]]
+}
+
+@test "BuildKite Github SSH repo parsing" {
+    random_hash=$(openssl rand -hex 20)
+
+    touch .env.test
+    echo "DEBRICKED_USERNAME=$USERNAME" > .env.test
+    echo "DEBRICKED_PASSWORD=$PASSWORD" >> .env.test
+    echo "BUILDKITE_REPO=git@gitlab.com:1337/someuser/repo-is_her3.git" >> .env.test
+    echo "BUILDKITE_BRANCH=main" >> .env.test
+    echo "BUILDKITE_COMMIT=$random_hash" >> .env.test
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        --entrypoint /buildkite.sh \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ " someuser/repo-is_her3 " && $output =~ "https://gitlab.com/someuser/repo-is_her3" && "$status" -eq 0 ]]
+}
+
+@test "BuildKite Github https repo parsing" {
+    random_hash=$(openssl rand -hex 20)
+
+    touch .env.test
+    echo "DEBRICKED_USERNAME=$USERNAME" > .env.test
+    echo "DEBRICKED_PASSWORD=$PASSWORD" >> .env.test
+    echo "BUILDKITE_REPO=https://some.git.host/someuser/repo-is_her3.git" >> .env.test
+    echo "BUILDKITE_BRANCH=main" >> .env.test
+    echo "BUILDKITE_COMMIT=$random_hash" >> .env.test
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        --entrypoint /buildkite.sh \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ " someuser/repo-is_her3 " && $output =~ "https://some.git.host/someuser/repo-is_her3" && "$status" -eq 0 ]]
+}
