@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 2.1.0
+
+- minor: Add BuildKite pipe script
+
 ## 2.0.0
 
 - major: Upgrade Debricked-cli to version 10. Snippet analysis is now disabled by default, it can be enabled by setting SNIPPET_ANALYSIS to true
