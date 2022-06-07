@@ -11,8 +11,5 @@ BRANCH=${BUILD_SOURCEBRANCHNAME}
 BASE_DIRECTORY=${BUILD_SOURCESDIRECTORY}
 REPOSITORY_URL=${BUILD_REPOSITORY_URI}
 INTEGRATION_NAME=azureDevOps
-if command -v git &> /dev/null
-then
-  AUTHOR=$(git log -1 --pretty=%ae)
-fi
+AUTHOR=${BUILD_REQUESTEDFOREMAIL}
 source "$(dirname "$0")/common.sh"
