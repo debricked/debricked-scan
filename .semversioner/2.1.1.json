@@ -1,0 +1,6 @@
+[
+  {
+    "description": "Fix setting commit author in Azure DevOps",
+    "type": "patch"
+  }
+]
