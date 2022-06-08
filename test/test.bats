@@ -602,3 +602,182 @@ setup() {
 
     [[ $output =~ " someuser/repo-is_her3 " && $output =~ "https://some.git.host/someuser/repo-is_her3" && "$status" -eq 0 ]]
 }
+
+@test "Argo Workflows missing DEBRICKED_GIT_URL" {
+    random_hash=$(openssl rand -hex 20)
+
+    touch .env.test
+    echo "DEBRICKED_USERNAME=$USERNAME" > .env.test
+    echo "DEBRICKED_PASSWORD=$PASSWORD" >> .env.test
+    echo "DEBRICKED_GIT_URL=''" >> .env.test
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        --entrypoint /argo.sh \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ "Your repository URL could not be found. Set it manually with DEBRICKED_REPOSITORY_URL" && "$status" -eq 0 ]]
+}
+
+@test "Argo Workflows Github unknown repo url" {
+    random_hash=$(openssl rand -hex 20)
+
+    touch .env.test
+    echo "DEBRICKED_USERNAME=$USERNAME" > .env.test
+    echo "DEBRICKED_PASSWORD=$PASSWORD" >> .env.test
+    echo "DEBRICKED_GIT_URL=test-repo-name-url" >> .env.test
+    echo "REPOSITORY=test-repo-name" >> .env.test
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        --entrypoint /argo.sh \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ " test-repo-name " && $output =~ "Your repository URL could not be found" && "$status" -eq 0 ]]
+}
+
+@test "Argo Workflows Github repourl override" {
+    random_hash=$(openssl rand -hex 20)
+
+    touch .env.test
+    echo "DEBRICKED_USERNAME=$USERNAME" > .env.test
+    echo "DEBRICKED_PASSWORD=$PASSWORD" >> .env.test
+    echo "DEBRICKED_GIT_URL=https://github.com/location/here.git" >> .env.test
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test
+    echo "DEBRICKED_REPOSITORY_URL=https://some.git.host/location/here" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        --entrypoint /argo.sh \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ " location/here " && $output =~ "https://some.git.host/location/here" && "$status" -eq 0 ]]
+}
+
+@test "Argo Workflows Github SSH repo parsing" {
+    random_hash=$(openssl rand -hex 20)
+
+    touch .env.test
+    echo "DEBRICKED_USERNAME=$USERNAME" > .env.test
+    echo "DEBRICKED_PASSWORD=$PASSWORD" >> .env.test
+    echo "DEBRICKED_GIT_URL=git@gitlab.com:1337/someuser/repo-is_her3.git" >> .env.test
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        --entrypoint /argo.sh \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ " someuser/repo-is_her3 " && $output =~ "https://gitlab.com/someuser/repo-is_her3" && "$status" -eq 0 ]]
+}
+
+@test "Argo Workflows Github https repo parsing" {
+    random_hash=$(openssl rand -hex 20)
+
+    touch .env.test
+    echo "DEBRICKED_USERNAME=$USERNAME" > .env.test
+    echo "DEBRICKED_PASSWORD=$PASSWORD" >> .env.test
+    echo "DEBRICKED_GIT_URL=https://some.git.host/someuser/repo-is_her3.git" >> .env.test
+    echo "BASE_DIRECTORY=/test/not-vulnerable" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        --entrypoint /argo.sh \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ " someuser/repo-is_her3 " && $output =~ "https://some.git.host/someuser/repo-is_her3" && "$status" -eq 0 ]]
+}
+
+@test "Argo Workflows missing git repo with commit variable" {
+    random_hash=$(openssl rand -hex 20)
+
+    touch .env.test
+    echo "DEBRICKED_USERNAME=$USERNAME" > .env.test
+    echo "DEBRICKED_PASSWORD=$PASSWORD" >> .env.test
+    echo "COMMIT=test-commit" >> .env.test
+    echo "DEBRICKED_GIT_URL=https://some.git.host/someuser/repo-is_her3.git" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w /root \
+        --entrypoint /argo.sh \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ " test-commit " && $output =~ "Repository branch could not be found" && $output =~ "Commit-author could not be found" && "$status" -eq 0 ]]
+}
+
+@test "Argo Workflows missing git repo and variables" {
+    random_hash=$(openssl rand -hex 20)
+
+    touch .env.test
+    echo "DEBRICKED_USERNAME=$USERNAME" > .env.test
+    echo "DEBRICKED_PASSWORD=$PASSWORD" >> .env.test
+    echo "DEBRICKED_GIT_URL=https://some.git.host/someuser/repo-is_her3.git" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w /root \
+        --entrypoint /argo.sh \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ "Commit could not be found" && "$status" -eq 1 ]]
+}
+
+@test "Argo Workflows missing git repo all variables set" {
+    random_hash=$(openssl rand -hex 20)
+
+    touch .env.test
+    echo "DEBRICKED_USERNAME=$USERNAME" > .env.test
+    echo "DEBRICKED_PASSWORD=$PASSWORD" >> .env.test
+    echo "DEBRICKED_GIT_URL=https://some.git.host/someuser/repo-is_her3.git" >> .env.test
+    echo "COMMIT=test-commit" >> .env.test
+    echo "BRANCH=test-branch" >> .env.test
+    echo "AUTHOR=test-author" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w /root \
+        --entrypoint /argo.sh \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ " test-commit " && $output =~ "=test-branch " && $output =~ "=test-author " && "$status" -eq 0 ]]
+}
