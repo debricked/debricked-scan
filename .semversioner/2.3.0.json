@@ -1,0 +1,6 @@
+[
+  {
+    "description": "Add githubActions as integration name",
+    "type": "minor"
+  }
+]
