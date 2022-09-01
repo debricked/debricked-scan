@@ -817,6 +817,7 @@ setup() {
     echo "TRAVIS_COMMIT=$random_hash" >> .env.test
     echo "TRAVIS_BUILD_DIR=/test/not-vulnerable" >> .env.test
     echo "DEBRICKED_REPOSITORY_URL=https://some.git.host/location/here" >> .env.test
+    echo "AUTHOR=author" >> .env.test
 
     run docker run \
         --env-file ./.env.test \
@@ -828,5 +829,5 @@ setup() {
     echo "Status: $status"
     echo "Output: $output"
 
-    [[ $output =~ " test-repo-name " && $output =~ " ${random_hash} " && $output =~ " --branch-name=main " && $output =~ " --author=" && $output =~ "Starting from $(pwd)/test/not-vulnerable" && $output =~ " https://some.git.host/location/here " && "$status" -eq 0 ]]
+    [[ $output =~ " test-repo-name " && $output =~ " ${random_hash} " && $output =~ " --branch-name=main " && $output =~ " --author=" && $output =~ "Starting from /test/not-vulnerable" && $output =~ " https://some.git.host/location/here " && "$status" -eq 0 ]]
 }

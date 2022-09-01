@@ -4,6 +4,10 @@
 # Pipe for integrating Travis-CI with Debricked. Automatically analyse your latest commits and pull requests for known vulnerabilities.
 #
 
+# The absolute path to the directory where the repository being built has been copied on the worker.
+# HOME is set to /home/travis on Linux, /Users/travis on MacOS, and /c/Users/travis on Windows.
+cd "${TRAVIS_BUILD_DIR}"
+
 USERNAME="${DEBRICKED_USERNAME}"
 PASSWORD="${DEBRICKED_PASSWORD}"
 
@@ -27,11 +31,6 @@ COMMIT="${TRAVIS_COMMIT}"
 
 INTEGRATION_NAME=travis
 
-# The absolute path to the directory where the repository being built has been copied on the worker.
-# HOME is set to /home/travis on Linux, /Users/travis on MacOS, and /c/Users/travis on Windows.
-BASE_DIRECTORY=${TRAVIS_BUILD_DIR}
-
-
 # Set to true if the job is running in debug mode
 DEBUG=${TRAVIS_DEBUG_MODE:="false"}
 RECURSIVE_FILE_SEARCH=${RECURSIVE_FILE_SEARCH:="true"}
@@ -39,7 +38,9 @@ UPLOAD_ALL_FILES=${UPLOAD_ALL_FILES:="false"}
 SKIP_SCAN=${SKIP_SCAN:="false"}
 DISABLE_CONDITIONAL_SKIP_SCAN=${DISABLE_CONDITIONAL_SKIP_SCAN:="false"}
 
-if command -v git &> /dev/null
+if [ -n "${AUTHOR}" ]; then
+  AUTHOR="${AUTHOR}"
+elif command -v git &> /dev/null
 then
   AUTHOR=$(git log -1 --pretty=%ae)
 fi
