@@ -781,3 +781,53 @@ setup() {
 
     [[ $output =~ " test-commit " && $output =~ "=test-branch " && $output =~ "=test-author " && "$status" -eq 0 ]]
 }
+
+@test "Travis CI Github unknown repo url" {
+    random_hash=$(openssl rand -hex 20)
+
+    touch .env.test
+    echo "DEBRICKED_USERNAME=$USERNAME" > .env.test
+    echo "DEBRICKED_PASSWORD=$PASSWORD" >> .env.test
+    echo "TRAVIS_REPO_SLUG=test-repo-name" >> .env.test
+    echo "TRAVIS_BRANCH=main" >> .env.test
+    echo "TRAVIS_COMMIT=$random_hash" >> .env.test
+    echo "TRAVIS_BUILD_DIR=/test/not-vulnerable" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        --entrypoint /travis-ci.sh \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ " test-repo-name " && $output =~ "Your repository URL could not be found" && "$status" -eq 0 ]]
+}
+
+@test "Travis CI Github repourl override" {
+    random_hash=$(openssl rand -hex 20)
+
+    touch .env.test
+    echo "DEBRICKED_USERNAME=$USERNAME" > .env.test
+    echo "DEBRICKED_PASSWORD=$PASSWORD" >> .env.test
+    echo "TRAVIS_REPO_SLUG=test-repo-name" >> .env.test
+    echo "TRAVIS_BRANCH=main" >> .env.test
+    echo "TRAVIS_COMMIT=$random_hash" >> .env.test
+    echo "TRAVIS_BUILD_DIR=/test/not-vulnerable" >> .env.test
+    echo "DEBRICKED_REPOSITORY_URL=https://some.git.host/location/here" >> .env.test
+    echo "AUTHOR=author" >> .env.test
+
+    run docker run \
+        --env-file ./.env.test \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        --entrypoint /travis-ci.sh \
+        ${DOCKER_IMAGE}:test
+
+    echo "Status: $status"
+    echo "Output: $output"
+
+    [[ $output =~ " test-repo-name " && $output =~ " ${random_hash} " && $output =~ " --branch-name=main " && $output =~ " --author=" && $output =~ "Starting from /test/not-vulnerable" && $output =~ " https://some.git.host/location/here " && "$status" -eq 0 ]]
+}
