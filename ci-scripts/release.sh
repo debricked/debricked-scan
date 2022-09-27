@@ -30,6 +30,7 @@ echo ${DOCKERHUB_PASSWORD} | docker login --username "$DOCKERHUB_USERNAME" --pas
 docker build -t ${IMAGE} .
 docker tag ${IMAGE} ${IMAGE}:${new_version}
 docker push ${IMAGE}
+docker push ${IMAGE}:${new_version}
 
 ##
 # Step 4: Commit back to the repository
