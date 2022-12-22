@@ -24,6 +24,8 @@ COPY pipe /
 COPY test /test
 RUN chmod a+x /*.sh
 
+RUN git config --global --add safe.directory '*'
+
 # Run debricked-cli once during build to fetch all dependencies
 RUN ["/root/.composer/vendor/debricked/cli/bin/console", "debricked:scan", "--help"]
 
