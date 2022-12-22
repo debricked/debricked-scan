@@ -1,0 +1,6 @@
+[
+  {
+    "description": "add globally safe git dir",
+    "type": "patch"
+  }
+]

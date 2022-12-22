@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 2.3.2
+
+- patch: add globally safe git dir
+
 ## 2.3.1
 
 - patch: Add Travis CI pipe script
