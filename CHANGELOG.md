@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 2.3.3
+
+- patch: Upgrade debricked-cli
+
 ## 2.3.2
 
 - patch: add globally safe git dir
