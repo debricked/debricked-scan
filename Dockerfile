@@ -18,7 +18,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ 
 
 RUN composer global config minimum-stability beta \
     && composer global config --no-plugins allow-plugins.symfony/flex true \
-    && composer global require debricked/cli ^10.2.0 --prefer-stable
+    && composer global require debricked/cli ^10.4.0 --prefer-stable
 
 COPY pipe /
 COPY test /test
