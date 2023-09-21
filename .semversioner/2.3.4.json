@@ -1,0 +1,6 @@
+[
+  {
+    "description": "Upgrade to latest CLI.",
+    "type": "patch"
+  }
+]
