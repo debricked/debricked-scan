@@ -14,7 +14,7 @@ test: &test
 push: &push
   step:
     name: Push and Tag
-    image: python:3.7
+    image: python:3.10-slim
     script:
       - pip install semversioner==0.*
       - chmod a+x ci-scripts/release.sh

@@ -2,7 +2,7 @@ name: Debricked Scan
 image: debricked/debricked-scan:2.3.4
 category: Security
 description: Pipe for integrating Bitbucket with Debricked. Automatically analyse your latest commits and pull requests for known vulnerabilities.
-repository: https://bitbucket.org/debricked/debricked
+repository: https://bitbucket.org/debricked/debricked-scan
 maintainer:
   name: Debricked
   website: https://debricked.com
@@ -11,7 +11,7 @@ vendor:
   name: Debricked
   website: https://debricked.com
   email: support@debricked.com
-icon: https://app.debricked.com/apple-touch-icon.png
+icon: https://debricked.com/apple-touch-icon.png
 tags:
     - Dependency management
     - Security
