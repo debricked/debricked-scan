@@ -83,3 +83,8 @@ test/not-vulnerable/yarn.lock
 test/not-vulnerable/node_modules
 .gradle-init-script.debricked.groovy
 debricked
+
+# Dockerignore specific
+test/
+ci-scripts/
+.semversioner/

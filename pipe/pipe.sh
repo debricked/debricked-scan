@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
-#
-# Pipe for integrating Bitbucket with Debricked. Automatically analyse your latest commits and pull requests for known vulnerabilities.
-#
 
-REPOSITORY="${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}"
-COMMIT=${BITBUCKET_COMMIT}
-BRANCH=${BITBUCKET_BRANCH}
-REPOSITORY_URL=${BITBUCKET_GIT_HTTP_ORIGIN}
-INTEGRATION_NAME=bitbucket
+# If BASE_DIRECTORY is not set, fallback to current directory
+if [ -z "$BASE_DIRECTORY" ]
+then
+  BASE_DIRECTORY=.
+else
+  BASE_DIRECTORY="${PWD}${BASE_DIRECTORY}"
+fi
+
 if command -v git &> /dev/null
 then
   AUTHOR=$(git log -1 --pretty=%ae)
 fi
-source "$(dirname "$0")/common.sh"
+
+debricked scan ${BASE_DIRECTORY} --author=${AUTHOR} --branch=${BITBUCKET_BRANCH} --commit=${BITBUCKET_COMMIT} \
+  --integration="bitbucket" --repository="${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}" \
+  --repository-url=${BITBUCKET_GIT_HTTP_ORIGIN}
