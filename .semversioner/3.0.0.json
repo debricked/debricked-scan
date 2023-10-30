@@ -1,0 +1,6 @@
+[
+  {
+    "description": "This is a major release which utilises our new CLI. This release only support Bitbucket, for other integrations, [please see our documentation](https://portal.debricked.com/integrations-48)",
+    "type": "major"
+  }
+]
