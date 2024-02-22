@@ -16,7 +16,7 @@ push: &push
     name: Push and Tag
     image: python:3.10-slim
     script:
-      - apt-get install -y git
+      - apt-get update && apt-get install -y git
       - pip install semversioner==0.*
       - chmod a+x ci-scripts/release.sh
       - ./ci-scripts/release.sh debricked/debricked-scan
