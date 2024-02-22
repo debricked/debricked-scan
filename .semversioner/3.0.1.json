@@ -1,0 +1,6 @@
+[
+  {
+    "description": "Fix safe directory issue in Git",
+    "type": "patch"
+  }
+]

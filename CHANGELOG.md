@@ -1,8 +1,13 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 3.0.1
+
+- patch: Fix safe directory issue in Git
+
 ## 3.0.0
-This is a major release which utilises our new CLI. This release only support Bitbucket, for other integrations, [please see our documentation](https://portal.debricked.com/integrations-48)
+
+- major: This is a major release which utilises our new CLI. This release only support Bitbucket, for other integrations, [please see our documentation](https://portal.debricked.com/integrations-48)
 
 ## 2.3.4
 
