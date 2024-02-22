@@ -10,6 +10,7 @@ fi
 
 if command -v git &> /dev/null
 then
+  git config --global --add safe.directory "$(pwd)"
   AUTHOR=$(git log -1 --pretty=%ae)
 fi
 

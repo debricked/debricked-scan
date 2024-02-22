@@ -1,0 +1,4 @@
+{
+  "type": "patch",
+  "description": "Fix safe directory issue in Git"
+}
