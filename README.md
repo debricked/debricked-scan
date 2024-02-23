@@ -8,7 +8,7 @@ Add the following snippet to the script section of your `bitbucket-pipelines.yml
 
 ```yaml
 script:
-  - pipe: debricked/debricked-scan:3.0.1
+  - pipe: debricked/debricked-scan:3.1.0
     variables:
       DEBRICKED_TOKEN: $DEBRICKED_TOKEN
       # BASE_DIRECTORY: "<string>" # Optional

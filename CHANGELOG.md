@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 3.1.0
+
+- minor: Switch to Debian base image for improved compatibility
+
 ## 3.0.1
 
 - patch: Fix safe directory issue in Git
