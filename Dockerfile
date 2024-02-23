@@ -1,4 +1,4 @@
-FROM debricked/cli:latest-resolution
+FROM debricked/cli:latest-resolution-debian
 
 RUN apk add --no-cache bash git
 
