@@ -1,6 +1,10 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 4.0.0
+
+- major: Upgrade to debricked/cli v2
+
 ## 3.1.0
 
 - minor: Switch to Debian base image for improved compatibility

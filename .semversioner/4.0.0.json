@@ -1,0 +1,6 @@
+[
+  {
+    "description": "Upgrade to debricked/cli v2",
+    "type": "major"
+  }
+]
