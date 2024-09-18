@@ -29,8 +29,7 @@ echo "Build and push docker image..."
 echo ${DOCKERHUB_PASSWORD} | docker login --username "$DOCKERHUB_USERNAME" --password-stdin
 docker build -t ${IMAGE} .
 docker tag ${IMAGE} ${IMAGE}:${new_version}
-# TODO: Do not push to latest tag until legacy CLI has been deprecated
-#docker push ${IMAGE}
+docker push ${IMAGE}
 docker push ${IMAGE}:${new_version}
 
 ##
